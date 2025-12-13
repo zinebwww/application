@@ -1,0 +1,4 @@
+# Protection du dossier data
+Options -Indexes
+Deny from all
+

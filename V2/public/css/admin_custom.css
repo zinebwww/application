@@ -1,0 +1,28 @@
+/* Styles personnalisés pour l'espace admin - Table responsive */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table td, .table th {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.table td.text-truncate, .table th.text-truncate {
+    max-width: 200px;
+}
+
+/* Sur mobile, réduire encore plus */
+@media (max-width: 768px) {
+    .table td, .table th {
+        font-size: 0.875rem;
+        padding: 0.5rem;
+    }
+    
+    .table td.text-truncate, .table th.text-truncate {
+        max-width: 120px;
+    }
+}
+

@@ -1,0 +1,2288 @@
+[
+    {
+        "id": "notif_692756856ebfd9.57369562",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #5 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=5",
+        "read": true,
+        "created_at": "2025-11-26 20:35:33"
+    },
+    {
+        "id": "notif_692756fb0ffcf1.90210441",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #6 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=6",
+        "read": true,
+        "created_at": "2025-11-26 20:37:31"
+    },
+    {
+        "id": "notif_692757388c7a18.58917031",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #6 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "mes_demandes.php?action=voir&id=6",
+        "read": true,
+        "created_at": "2025-11-26 20:38:32"
+    },
+    {
+        "id": "notif_6927581c23aa16.77523099",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #6 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/mes_demandes.php?action=voir&id=6",
+        "read": true,
+        "created_at": "2025-11-26 20:42:20"
+    },
+    {
+        "id": "notif_6927670458cce7.39632031",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #7 de Jean Dupont \u00e0 valider.",
+        "link": "manager\/demandes.php?action=voir&id=7",
+        "read": true,
+        "created_at": "2025-11-26 21:45:56"
+    },
+    {
+        "id": "notif_6927674fa677b3.52109521",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #7 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "mes_demandes.php?action=voir&id=7",
+        "read": true,
+        "created_at": "2025-11-26 21:47:11"
+    },
+    {
+        "id": "notif_69276752bafb86.76474939",
+        "user_id": 7,
+        "type": "info",
+        "message": "Demande #7 de Jean Dupont valid\u00e9e par Jean Dupont - En attente d'approbation administrative.",
+        "link": "admin\/demandes.php?action=voir&id=7",
+        "read": true,
+        "created_at": "2025-11-26 21:47:14"
+    },
+    {
+        "id": "notif_692769138e8f20.45463808",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #5 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "mes_demandes.php?action=voir&id=5",
+        "read": true,
+        "created_at": "2025-11-26 21:54:43"
+    },
+    {
+        "id": "notif_692769159663c7.74167013",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #5 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/admin\/details_demande.php?id=5",
+        "read": true,
+        "created_at": "2025-11-26 21:54:45"
+    },
+    {
+        "id": "notif_6927714268d9f6.43669658",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #7 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/mes_demandes.php?action=voir&id=7",
+        "read": true,
+        "created_at": "2025-11-26 22:29:38"
+    },
+    {
+        "id": "notif_692775714cb1a3.39519171",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #8 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=8",
+        "read": true,
+        "created_at": "2025-11-26 22:47:29"
+    },
+    {
+        "id": "notif_692775714e78f2.51021424",
+        "user_id": 7,
+        "type": "secondary",
+        "message": "Nouvelle demande #8 soumise par Jean Dupont (en attente validation manager).",
+        "link": "..\/admin\/details_demande.php?id=8",
+        "read": true,
+        "created_at": "2025-11-26 22:47:29"
+    },
+    {
+        "id": "notif_692775df2ed257.54751821",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #8 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "mes_demandes.php?action=voir&id=8",
+        "read": true,
+        "created_at": "2025-11-26 22:49:19"
+    },
+    {
+        "id": "notif_692775e0217d56.70949418",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #8 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/admin\/details_demande.php?id=8",
+        "read": true,
+        "created_at": "2025-11-26 22:49:20"
+    },
+    {
+        "id": "notif_69277712c52617.73397463",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #9 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=9",
+        "read": true,
+        "created_at": "2025-11-26 22:54:26"
+    },
+    {
+        "id": "notif_69277712c71973.04308370",
+        "user_id": 7,
+        "type": "secondary",
+        "message": "Nouvelle demande #9 soumise par Jean Dupont (en attente validation manager).",
+        "link": "..\/admin\/details_demande.php?id=9",
+        "read": true,
+        "created_at": "2025-11-26 22:54:26"
+    },
+    {
+        "id": "notif_6927772fa7c281.06636799",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #9 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "mes_demandes.php?action=voir&id=9",
+        "read": true,
+        "created_at": "2025-11-26 22:54:55"
+    },
+    {
+        "id": "notif_69277730aa9967.13368419",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #9 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/admin\/details_demande.php?id=9",
+        "read": true,
+        "created_at": "2025-11-26 22:54:56"
+    },
+    {
+        "id": "notif_6927775d63ee82.68073139",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #9 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/mes_demandes.php?action=voir&id=9",
+        "read": true,
+        "created_at": "2025-11-26 22:55:41"
+    },
+    {
+        "id": "notif_692777cc03ab68.08241303",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #10 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=10",
+        "read": true,
+        "created_at": "2025-11-26 22:57:32"
+    },
+    {
+        "id": "notif_692777cc05d810.91790934",
+        "user_id": 7,
+        "type": "secondary",
+        "message": "Nouvelle demande #10 soumise par Anwar Zahoui (en attente validation manager).",
+        "link": "..\/admin\/details_demande.php?id=10",
+        "read": true,
+        "created_at": "2025-11-26 22:57:32"
+    },
+    {
+        "id": "notif_692777f41aaee1.31520750",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #10 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "mes_demandes.php?action=voir&id=10",
+        "read": true,
+        "created_at": "2025-11-26 22:58:12"
+    },
+    {
+        "id": "notif_692777f508c8a1.32974491",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #10 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/admin\/details_demande.php?id=10",
+        "read": true,
+        "created_at": "2025-11-26 22:58:13"
+    },
+    {
+        "id": "notif_69283530e9efb0.17755302",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #11 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=11",
+        "read": true,
+        "created_at": "2025-11-27 12:25:36"
+    },
+    {
+        "id": "notif_69283530ec3e40.67034903",
+        "user_id": 7,
+        "type": "secondary",
+        "message": "Nouvelle demande #11 soumise par Anwar Zahoui (en attente validation manager).",
+        "link": "..\/admin\/details_demande.php?id=11",
+        "read": true,
+        "created_at": "2025-11-27 12:25:36"
+    },
+    {
+        "id": "notif_6928355c1424a0.81450959",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #11 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "mes_demandes.php?action=voir&id=11",
+        "read": true,
+        "created_at": "2025-11-27 12:26:20"
+    },
+    {
+        "id": "notif_6928355d2f7164.82909697",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #11 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/admin\/details_demande.php?id=11",
+        "read": true,
+        "created_at": "2025-11-27 12:26:21"
+    },
+    {
+        "id": "notif_692835cb045bd2.75712409",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #11 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/mes_demandes.php?action=voir&id=11",
+        "read": true,
+        "created_at": "2025-11-27 12:28:11"
+    },
+    {
+        "id": "notif_6928364e8c2ef7.88180974",
+        "user_id": 8,
+        "type": "danger",
+        "message": "Votre demande de frais #11 a \u00e9t\u00e9 rejet\u00e9e d\u00e9finitivement.",
+        "link": "..\/mes_demandes.php?action=voir&id=11",
+        "read": true,
+        "created_at": "2025-11-27 12:30:22"
+    },
+    {
+        "id": "notif_69283c5d280654.73583635",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #11 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/mes_demandes.php?action=voir&id=11",
+        "read": true,
+        "created_at": "2025-11-27 12:56:13"
+    },
+    {
+        "id": "notif_69283f1098fa21.29956993",
+        "user_id": 8,
+        "type": "danger",
+        "message": "Votre demande de frais #11 a \u00e9t\u00e9 rejet\u00e9e d\u00e9finitivement.",
+        "link": "..\/mes_demandes.php?action=voir&id=11",
+        "read": true,
+        "created_at": "2025-11-27 13:07:44"
+    },
+    {
+        "id": "notif_69287d4d30fc38.76512662",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #4 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=4",
+        "read": true,
+        "created_at": "2025-11-27 17:33:17"
+    },
+    {
+        "id": "notif_69287d4d31a218.42885655",
+        "user_id": 7,
+        "type": "secondary",
+        "message": "Nouvelle demande #4 soumise par zineb warit (en attente validation manager).",
+        "link": "..\/admin\/details_demande.php?id=4",
+        "read": true,
+        "created_at": "2025-11-27 17:33:17"
+    },
+    {
+        "id": "notif_69289ccd074e41.45101846",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #4 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "mes_demandes.php?action=voir&id=4",
+        "read": true,
+        "created_at": "2025-11-27 19:47:41"
+    },
+    {
+        "id": "notif_69289ccdf0e4f6.11002498",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #4 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/admin\/details_demande.php?id=4",
+        "read": true,
+        "created_at": "2025-11-27 19:47:41"
+    },
+    {
+        "id": "notif_69289e9dcfb1a4.41000680",
+        "user_id": 8,
+        "type": "danger",
+        "message": "Votre demande de frais #4 a \u00e9t\u00e9 rejet\u00e9e d\u00e9finitivement.",
+        "link": "..\/mes_demandes.php?action=voir&id=4",
+        "read": true,
+        "created_at": "2025-11-27 19:55:25"
+    },
+    {
+        "id": "notif_6928a262102cb2.56757819",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #5 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=5",
+        "read": true,
+        "created_at": "2025-11-27 20:11:30"
+    },
+    {
+        "id": "notif_6928a262114dd2.33312538",
+        "user_id": 7,
+        "type": "secondary",
+        "message": "Nouvelle demande #5 soumise par zineb warit (en attente validation manager).",
+        "link": "..\/admin\/details_demande.php?id=5",
+        "read": true,
+        "created_at": "2025-11-27 20:11:30"
+    },
+    {
+        "id": "notif_6928a28660e062.62779944",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #5 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "mes_demandes.php?action=voir&id=5",
+        "read": true,
+        "created_at": "2025-11-27 20:12:06"
+    },
+    {
+        "id": "notif_6928a2873d44e5.11200460",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #5 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/admin\/details_demande.php?id=5",
+        "read": true,
+        "created_at": "2025-11-27 20:12:07"
+    },
+    {
+        "id": "notif_6928a2c5473db6.71802353",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #5 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/mes_demandes.php?action=voir&id=5",
+        "read": true,
+        "created_at": "2025-11-27 20:13:09"
+    },
+    {
+        "id": "notif_6928a60eb37a01.14463873",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #6 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=6",
+        "read": true,
+        "created_at": "2025-11-27 20:27:10"
+    },
+    {
+        "id": "notif_6928a60eb3d0d6.06780872",
+        "user_id": 7,
+        "type": "secondary",
+        "message": "Nouvelle demande #6 soumise par zineb warit (en attente validation manager).",
+        "link": "..\/admin\/details_demande.php?id=6",
+        "read": true,
+        "created_at": "2025-11-27 20:27:10"
+    },
+    {
+        "id": "notif_6928a60eb40cd3.38865409",
+        "user_id": 11,
+        "type": "secondary",
+        "message": "Nouvelle demande #6 soumise par zineb warit (en attente validation manager).",
+        "link": "..\/admin\/details_demande.php?id=6",
+        "read": true,
+        "created_at": "2025-11-27 20:27:10"
+    },
+    {
+        "id": "notif_6928a64ab1a297.54808681",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #6 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "mes_demandes.php?action=voir&id=6",
+        "read": true,
+        "created_at": "2025-11-27 20:28:10"
+    },
+    {
+        "id": "notif_6928a64b6d9ee5.30309153",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #6 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/admin\/details_demande.php?id=6",
+        "read": true,
+        "created_at": "2025-11-27 20:28:11"
+    },
+    {
+        "id": "notif_6928a64c1ee605.97691144",
+        "user_id": 11,
+        "type": "info",
+        "message": "Nouvelle demande #6 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/admin\/details_demande.php?id=6",
+        "read": true,
+        "created_at": "2025-11-27 20:28:12"
+    },
+    {
+        "id": "notif_6928a7afceecd7.56742113",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #7 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=7",
+        "read": true,
+        "created_at": "2025-11-27 20:34:07"
+    },
+    {
+        "id": "notif_6928a7afcf8ac0.31895124",
+        "user_id": 7,
+        "type": "secondary",
+        "message": "Nouvelle demande #7 soumise par Anwar Zahoui (en attente validation manager).",
+        "link": "..\/admin\/details_demande.php?id=7",
+        "read": true,
+        "created_at": "2025-11-27 20:34:07"
+    },
+    {
+        "id": "notif_6928a7afcfc7f4.54771185",
+        "user_id": 11,
+        "type": "secondary",
+        "message": "Nouvelle demande #7 soumise par Anwar Zahoui (en attente validation manager).",
+        "link": "..\/admin\/details_demande.php?id=7",
+        "read": true,
+        "created_at": "2025-11-27 20:34:07"
+    },
+    {
+        "id": "notif_6928a7c905bed6.32329510",
+        "user_id": 9,
+        "type": "success",
+        "message": "Votre demande de frais #7 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "mes_demandes.php?action=voir&id=7",
+        "read": false,
+        "created_at": "2025-11-27 20:34:33"
+    },
+    {
+        "id": "notif_6928a7c9acbe08.71844038",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #7 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/admin\/details_demande.php?id=7",
+        "read": true,
+        "created_at": "2025-11-27 20:34:33"
+    },
+    {
+        "id": "notif_6928a7ca584831.93854623",
+        "user_id": 11,
+        "type": "info",
+        "message": "Nouvelle demande #7 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/admin\/details_demande.php?id=7",
+        "read": true,
+        "created_at": "2025-11-27 20:34:34"
+    },
+    {
+        "id": "notif_6928a822d5f909.54650525",
+        "user_id": 9,
+        "type": "success",
+        "message": "Votre demande de frais #7 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/mes_demandes.php?action=voir&id=7",
+        "read": false,
+        "created_at": "2025-11-27 20:36:02"
+    },
+    {
+        "id": "notif_6928aa4a5c3243.83531102",
+        "user_id": 10,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #8 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=8",
+        "read": true,
+        "created_at": "2025-11-27 20:45:14"
+    },
+    {
+        "id": "notif_6928aa4a5c8a43.90709328",
+        "user_id": 7,
+        "type": "secondary",
+        "message": "Nouvelle demande #8 soumise par zineb (en attente validation manager).",
+        "link": "..\/admin\/details_demande.php?id=8",
+        "read": true,
+        "created_at": "2025-11-27 20:45:14"
+    },
+    {
+        "id": "notif_6928aa4a5cc590.18601322",
+        "user_id": 11,
+        "type": "secondary",
+        "message": "Nouvelle demande #8 soumise par zineb (en attente validation manager).",
+        "link": "..\/admin\/details_demande.php?id=8",
+        "read": true,
+        "created_at": "2025-11-27 20:45:14"
+    },
+    {
+        "id": "notif_6928aa86d08bf7.97303426",
+        "user_id": 13,
+        "type": "success",
+        "message": "Votre demande de frais #8 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "mes_demandes.php?action=voir&id=8",
+        "read": false,
+        "created_at": "2025-11-27 20:46:14"
+    },
+    {
+        "id": "notif_6928aa87b4b3d8.12757894",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #8 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/admin\/details_demande.php?id=8",
+        "read": true,
+        "created_at": "2025-11-27 20:46:15"
+    },
+    {
+        "id": "notif_6928aa886e4683.33735098",
+        "user_id": 11,
+        "type": "info",
+        "message": "Nouvelle demande #8 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/admin\/details_demande.php?id=8",
+        "read": true,
+        "created_at": "2025-11-27 20:46:16"
+    },
+    {
+        "id": "notif_6928aaac5af157.95819397",
+        "user_id": 13,
+        "type": "success",
+        "message": "Votre demande de frais #8 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/mes_demandes.php?action=voir&id=8",
+        "read": false,
+        "created_at": "2025-11-27 20:46:52"
+    },
+    {
+        "id": "notif_6928abe43f2496.40926272",
+        "user_id": 13,
+        "type": "danger",
+        "message": "Votre demande de frais #8 a \u00e9t\u00e9 rejet\u00e9e d\u00e9finitivement.",
+        "link": "..\/mes_demandes.php?action=voir&id=8",
+        "read": false,
+        "created_at": "2025-11-27 20:52:04"
+    },
+    {
+        "id": "notif_6928ad1551ff26.33647592",
+        "user_id": 13,
+        "type": "success",
+        "message": "Votre demande de frais #8 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/mes_demandes.php?action=voir&id=8",
+        "read": false,
+        "created_at": "2025-11-27 20:57:09"
+    },
+    {
+        "id": "notif_6928af1a066660.87143970",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #11 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/mes_demandes.php?action=voir&id=11",
+        "read": true,
+        "created_at": "2025-11-27 21:05:46"
+    },
+    {
+        "id": "notif_6928b484ab4a81.84873588",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #12 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=12",
+        "read": true,
+        "created_at": "2025-11-27 21:28:52"
+    },
+    {
+        "id": "notif_6928b484aed760.25073924",
+        "user_id": 7,
+        "type": "secondary",
+        "message": "Nouvelle demande #12 soumise par Jean Dupont (en attente validation manager).",
+        "link": "..\/admin\/details_demande.php?id=12",
+        "read": true,
+        "created_at": "2025-11-27 21:28:52"
+    },
+    {
+        "id": "notif_6928b7a6d36e73.67390221",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #13 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=13",
+        "read": true,
+        "created_at": "2025-11-27 21:42:14"
+    },
+    {
+        "id": "notif_6928b7a6d714d0.74691663",
+        "user_id": 7,
+        "type": "secondary",
+        "message": "Nouvelle demande #13 soumise par Anwar Zahoui (en attente validation manager).",
+        "link": "..\/admin\/details_demande.php?id=13",
+        "read": true,
+        "created_at": "2025-11-27 21:42:14"
+    },
+    {
+        "id": "notif_692de983c976a2.37930395",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #14 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=14",
+        "read": true,
+        "created_at": "2025-12-01 20:16:19"
+    },
+    {
+        "id": "notif_692de983cfd046.90203631",
+        "user_id": 7,
+        "type": "secondary",
+        "message": "Nouvelle demande #14 soumise par Jean Dupont (en attente validation manager).",
+        "link": "..\/admin\/details_demande.php?id=14",
+        "read": true,
+        "created_at": "2025-12-01 20:16:19"
+    },
+    {
+        "id": "notif_692deb18d52bc2.35677314",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #14 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "mes_demandes.php?action=voir&id=14",
+        "read": true,
+        "created_at": "2025-12-01 20:23:04"
+    },
+    {
+        "id": "notif_692deb1af368d9.38921919",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #14 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/admin\/details_demande.php?id=14",
+        "read": true,
+        "created_at": "2025-12-01 20:23:06"
+    },
+    {
+        "id": "notif_692debd0d18da5.91276965",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #14 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/mes_demandes.php?action=voir&id=14",
+        "read": true,
+        "created_at": "2025-12-01 20:26:08"
+    },
+    {
+        "id": "notif_692df3f5725db8.90749731",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #15 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=15",
+        "read": true,
+        "created_at": "2025-12-01 21:00:53"
+    },
+    {
+        "id": "notif_692df409f06a17.10654065",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #15 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "mes_demandes.php?action=voir&id=15",
+        "read": true,
+        "created_at": "2025-12-01 21:01:13"
+    },
+    {
+        "id": "notif_692df40bce6ca1.21010717",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #15 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/admin\/details_demande.php?id=15",
+        "read": true,
+        "created_at": "2025-12-01 21:01:15"
+    },
+    {
+        "id": "notif_692dfc1b0ce519.35203379",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #13 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "mes_demandes.php?action=voir&id=13",
+        "read": true,
+        "created_at": "2025-12-01 21:35:39"
+    },
+    {
+        "id": "notif_692dfc1ce14890.60626267",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #13 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/admin\/details_demande.php?id=13",
+        "read": true,
+        "created_at": "2025-12-01 21:35:40"
+    },
+    {
+        "id": "notif_692dfeff247109.64287538",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #16 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=16",
+        "read": true,
+        "created_at": "2025-12-01 21:47:59"
+    },
+    {
+        "id": "notif_692dff0cdf1e85.45085976",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #16 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "mes_demandes.php?action=voir&id=16",
+        "read": true,
+        "created_at": "2025-12-01 21:48:12"
+    },
+    {
+        "id": "notif_692dff0f9533f9.29432016",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #16 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/admin\/details_demande.php?id=16",
+        "read": true,
+        "created_at": "2025-12-01 21:48:15"
+    },
+    {
+        "id": "notif_692dff333e8610.75878164",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #16 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "mes_demandes.php?action=voir&id=16",
+        "read": true,
+        "created_at": "2025-12-01 21:48:51"
+    },
+    {
+        "id": "notif_692dffc3a3f2a3.55452934",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #12 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "mes_demandes.php?action=voir&id=12",
+        "read": true,
+        "created_at": "2025-12-01 21:51:15"
+    },
+    {
+        "id": "notif_692dffc5674fb2.48057053",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #12 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/admin\/details_demande.php?id=12",
+        "read": true,
+        "created_at": "2025-12-01 21:51:17"
+    },
+    {
+        "id": "notif_692e03f2c823e5.92869991",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #12 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "mes_demandes.php?action=voir&id=12",
+        "read": true,
+        "created_at": "2025-12-01 22:09:06"
+    },
+    {
+        "id": "notif_692e043b8ea0e5.76817928",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #15 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "mes_demandes.php?action=voir&id=15",
+        "read": true,
+        "created_at": "2025-12-01 22:10:19"
+    },
+    {
+        "id": "notif_692e044ce315d3.02903350",
+        "user_id": 8,
+        "type": "danger",
+        "message": "Votre demande de frais #13 a \u00e9t\u00e9 rejet\u00e9e d\u00e9finitivement.",
+        "link": "mes_demandes.php?action=voir&id=13",
+        "read": true,
+        "created_at": "2025-12-01 22:10:36"
+    },
+    {
+        "id": "notif_692e06a7caab07.37435440",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #17 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=17",
+        "read": true,
+        "created_at": "2025-12-01 22:20:39"
+    },
+    {
+        "id": "notif_692e08b77a33a1.39258025",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #18 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=18",
+        "read": true,
+        "created_at": "2025-12-01 22:29:27"
+    },
+    {
+        "id": "notif_692e0929cae666.17926867",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #18 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "mes_demandes.php?action=voir&id=18",
+        "read": true,
+        "created_at": "2025-12-01 22:31:21"
+    },
+    {
+        "id": "notif_692e092bbb8e99.99531555",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #18 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/admin\/details_demande.php?id=18",
+        "read": true,
+        "created_at": "2025-12-01 22:31:23"
+    },
+    {
+        "id": "notif_692e09404db364.50588105",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #18 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "mes_demandes.php?action=voir&id=18",
+        "read": true,
+        "created_at": "2025-12-01 22:31:44"
+    },
+    {
+        "id": "notif_692ebd9963c322.92373968",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #19 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=19",
+        "read": true,
+        "created_at": "2025-12-02 11:21:13"
+    },
+    {
+        "id": "notif_69307844bfde14.58370881",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #20 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=20",
+        "read": true,
+        "created_at": "2025-12-03 18:49:56"
+    },
+    {
+        "id": "notif_69307df8586265.51103668",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #21 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=21",
+        "read": true,
+        "created_at": "2025-12-03 19:14:16"
+    },
+    {
+        "id": "notif_6930821b887792.43928180",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #21 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "mes_demandes.php?action=voir&id=21",
+        "read": true,
+        "created_at": "2025-12-03 19:31:55"
+    },
+    {
+        "id": "notif_69308220d60e71.46351376",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #21 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/admin\/details_demande.php?id=21",
+        "read": true,
+        "created_at": "2025-12-03 19:32:00"
+    },
+    {
+        "id": "notif_69308aca0ca3f3.63686480",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #22 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=22",
+        "read": true,
+        "created_at": "2025-12-03 20:08:58"
+    },
+    {
+        "id": "notif_69308c84e62930.65523389",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #23 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=23",
+        "read": true,
+        "created_at": "2025-12-03 20:16:20"
+    },
+    {
+        "id": "notif_69308e3a031168.60911652",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #24 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=24",
+        "read": true,
+        "created_at": "2025-12-03 20:23:38"
+    },
+    {
+        "id": "notif_69309580a7ec18.15081778",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #25 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=25",
+        "read": true,
+        "created_at": "2025-12-03 20:54:40"
+    },
+    {
+        "id": "notif_693098afc80f12.54117902",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #26 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=26",
+        "read": true,
+        "created_at": "2025-12-03 21:08:15"
+    },
+    {
+        "id": "notif_6930990e051fe8.36084017",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #27 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=27",
+        "read": true,
+        "created_at": "2025-12-03 21:09:50"
+    },
+    {
+        "id": "notif_6930a2f3995519.88077067",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #28 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=28",
+        "read": true,
+        "created_at": "2025-12-03 21:52:03"
+    },
+    {
+        "id": "notif_6930a53bb1ec52.42523674",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #29 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=29",
+        "read": true,
+        "created_at": "2025-12-03 22:01:47"
+    },
+    {
+        "id": "notif_6930a60d867e71.48516761",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #30 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=30",
+        "read": true,
+        "created_at": "2025-12-03 22:05:17"
+    },
+    {
+        "id": "notif_6930a87389e898.96109858",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #31 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=31",
+        "read": true,
+        "created_at": "2025-12-03 22:15:31"
+    },
+    {
+        "id": "notif_6930a924023404.87501941",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #32 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=32",
+        "read": true,
+        "created_at": "2025-12-03 22:18:28"
+    },
+    {
+        "id": "notif_6930aac0892160.53035676",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #33 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=33",
+        "read": true,
+        "created_at": "2025-12-03 22:25:20"
+    },
+    {
+        "id": "notif_6930ac09c09495.67889780",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #34 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=34",
+        "read": true,
+        "created_at": "2025-12-03 22:30:49"
+    },
+    {
+        "id": "notif_6930ac66602b21.01174427",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #35 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=35",
+        "read": true,
+        "created_at": "2025-12-03 22:32:22"
+    },
+    {
+        "id": "notif_6930acdfad2898.02659226",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #36 \u00e0 valider.",
+        "link": "..\/manager\/demandes.php?action=voir&id=36",
+        "read": true,
+        "created_at": "2025-12-03 22:34:23"
+    },
+    {
+        "id": "notif_69336dfe236a83.43521156",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #22 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=22",
+        "read": true,
+        "created_at": "2025-12-06 00:42:54"
+    },
+    {
+        "id": "notif_69336f0f308196.45664370",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #23 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=23",
+        "read": true,
+        "created_at": "2025-12-06 00:47:27"
+    },
+    {
+        "id": "notif_69336fa3a6d328.63080163",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #23 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=23",
+        "read": true,
+        "created_at": "2025-12-06 00:49:55"
+    },
+    {
+        "id": "notif_69336fa5781f53.97225483",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #23 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=23",
+        "read": true,
+        "created_at": "2025-12-06 00:49:57"
+    },
+    {
+        "id": "notif_693378292bafa3.63606121",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #24 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=24",
+        "read": true,
+        "created_at": "2025-12-06 01:26:17"
+    },
+    {
+        "id": "notif_6933785e61e142.63138917",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #24 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=24",
+        "read": true,
+        "created_at": "2025-12-06 01:27:10"
+    },
+    {
+        "id": "notif_6933786029eb88.20772766",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #24 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=24",
+        "read": true,
+        "created_at": "2025-12-06 01:27:12"
+    },
+    {
+        "id": "notif_69337861c2d897.19125884",
+        "user_id": 11,
+        "type": "info",
+        "message": "Nouvelle demande #24 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=24",
+        "read": true,
+        "created_at": "2025-12-06 01:27:13"
+    },
+    {
+        "id": "notif_69337957ab95e5.34304399",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #25 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=25",
+        "read": true,
+        "created_at": "2025-12-06 01:31:19"
+    },
+    {
+        "id": "notif_69337ca4e0ff07.27890259",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #26 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=26",
+        "read": true,
+        "created_at": "2025-12-06 01:45:24"
+    },
+    {
+        "id": "notif_69337d40388ca6.05129039",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #27 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=27",
+        "read": true,
+        "created_at": "2025-12-06 01:48:00"
+    },
+    {
+        "id": "notif_693382825146d8.53790448",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #28 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=28",
+        "read": true,
+        "created_at": "2025-12-06 02:10:26"
+    },
+    {
+        "id": "notif_69338701901e23.64295815",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #29 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=29",
+        "read": true,
+        "created_at": "2025-12-06 02:29:37"
+    },
+    {
+        "id": "notif_693497f63b4150.57545867",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #30 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=30",
+        "read": true,
+        "created_at": "2025-12-06 21:54:14"
+    },
+    {
+        "id": "notif_6934987c9bb740.21800400",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #31 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=31",
+        "read": true,
+        "created_at": "2025-12-06 21:56:28"
+    },
+    {
+        "id": "notif_693499366af702.46686843",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #32 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=32",
+        "read": true,
+        "created_at": "2025-12-06 21:59:34"
+    },
+    {
+        "id": "notif_69349ad56d0e00.37960903",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #33 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=33",
+        "read": true,
+        "created_at": "2025-12-06 22:06:29"
+    },
+    {
+        "id": "notif_69349c54cc7036.94215238",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #34 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=34",
+        "read": true,
+        "created_at": "2025-12-06 22:12:52"
+    },
+    {
+        "id": "notif_69349db5421cd1.76829292",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #35 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=35",
+        "read": true,
+        "created_at": "2025-12-06 22:18:45"
+    },
+    {
+        "id": "notif_69349e1ed0ecc9.49529062",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #36 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=36",
+        "read": true,
+        "created_at": "2025-12-06 22:20:30"
+    },
+    {
+        "id": "notif_69349ff0b50e40.38251355",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #37 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=37",
+        "read": true,
+        "created_at": "2025-12-06 22:28:16"
+    },
+    {
+        "id": "notif_6934a050a2c100.53145695",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #38 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=38",
+        "read": true,
+        "created_at": "2025-12-06 22:29:52"
+    },
+    {
+        "id": "notif_6934a1e0215817.40894485",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #36 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=36",
+        "read": true,
+        "created_at": "2025-12-06 22:36:32"
+    },
+    {
+        "id": "notif_6934a1e1eb14a3.30309825",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #36 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=36",
+        "read": true,
+        "created_at": "2025-12-06 22:36:33"
+    },
+    {
+        "id": "notif_6934a1e46e9177.81007987",
+        "user_id": 11,
+        "type": "info",
+        "message": "Nouvelle demande #36 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=36",
+        "read": true,
+        "created_at": "2025-12-06 22:36:36"
+    },
+    {
+        "id": "notif_6934a3145fa856.41891853",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #36 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/mes_demandes.php?action=voir&id=36",
+        "read": true,
+        "created_at": "2025-12-06 22:41:40"
+    },
+    {
+        "id": "notif_6934a326a6f481.36772071",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #24 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/mes_demandes.php?action=voir&id=24",
+        "read": true,
+        "created_at": "2025-12-06 22:41:58"
+    },
+    {
+        "id": "notif_6934a333df0ce6.00863768",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #23 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/mes_demandes.php?action=voir&id=23",
+        "read": true,
+        "created_at": "2025-12-06 22:42:11"
+    },
+    {
+        "id": "notif_6934a351340f68.13469241",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #10 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=10",
+        "read": true,
+        "created_at": "2025-12-06 22:42:41"
+    },
+    {
+        "id": "notif_6934a3644e34d8.50362701",
+        "user_id": 2,
+        "type": "danger",
+        "message": "Votre demande de frais #8 a \u00e9t\u00e9 rejet\u00e9e d\u00e9finitivement.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=8",
+        "read": true,
+        "created_at": "2025-12-06 22:43:00"
+    },
+    {
+        "id": "notif_6934a453ebd548.69191751",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #5 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/mes_demandes.php?action=voir&id=5",
+        "read": true,
+        "created_at": "2025-12-06 22:46:59"
+    },
+    {
+        "id": "notif_6934a48f4fe5c7.44089140",
+        "user_id": 2,
+        "type": "danger",
+        "message": "Votre demande de frais #1 a \u00e9t\u00e9 rejet\u00e9e d\u00e9finitivement.",
+        "link": "..\/mes_demandes.php?action=voir&id=1",
+        "read": true,
+        "created_at": "2025-12-06 22:47:59"
+    },
+    {
+        "id": "notif_6934a5a0c9d044.92694226",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #39 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=39",
+        "read": true,
+        "created_at": "2025-12-06 22:52:32"
+    },
+    {
+        "id": "notif_6934a6a2126a80.18216573",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #39 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=39",
+        "read": true,
+        "created_at": "2025-12-06 22:56:50"
+    },
+    {
+        "id": "notif_6934a6a47fc0f1.61415125",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #39 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=39",
+        "read": true,
+        "created_at": "2025-12-06 22:56:52"
+    },
+    {
+        "id": "notif_6934a6a611d0c0.60770828",
+        "user_id": 11,
+        "type": "info",
+        "message": "Nouvelle demande #39 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=39",
+        "read": true,
+        "created_at": "2025-12-06 22:56:54"
+    },
+    {
+        "id": "notif_6934a6bab3ece0.06042439",
+        "user_id": 8,
+        "type": "danger",
+        "message": "Votre demande de frais #39 a \u00e9t\u00e9 rejet\u00e9e d\u00e9finitivement.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=39",
+        "read": true,
+        "created_at": "2025-12-06 22:57:14"
+    },
+    {
+        "id": "notif_6934a7b39a7fc0.90611996",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #40 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=40",
+        "read": true,
+        "created_at": "2025-12-06 23:01:23"
+    },
+    {
+        "id": "notif_6934a8466491a1.21804784",
+        "user_id": 8,
+        "type": "danger",
+        "message": "Votre demande de frais #40 a \u00e9t\u00e9 rejet\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=40",
+        "read": true,
+        "created_at": "2025-12-06 23:03:50"
+    },
+    {
+        "id": "notif_6934aa191a7e93.02594175",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #41 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=41",
+        "read": true,
+        "created_at": "2025-12-06 23:11:37"
+    },
+    {
+        "id": "notif_6934b204eb88b9.73264513",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #42 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=42",
+        "read": true,
+        "created_at": "2025-12-06 23:45:24"
+    },
+    {
+        "id": "notif_6934b2469e25b3.48377225",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #42 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=42",
+        "read": true,
+        "created_at": "2025-12-06 23:46:30"
+    },
+    {
+        "id": "notif_6934b24870ad38.22831433",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #42 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=42",
+        "read": true,
+        "created_at": "2025-12-06 23:46:32"
+    },
+    {
+        "id": "notif_6934b24ad67221.56475428",
+        "user_id": 11,
+        "type": "info",
+        "message": "Nouvelle demande #42 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=42",
+        "read": true,
+        "created_at": "2025-12-06 23:46:34"
+    },
+    {
+        "id": "notif_6934b25f9722b8.20801775",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #42 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=42",
+        "read": true,
+        "created_at": "2025-12-06 23:46:55"
+    },
+    {
+        "id": "notif_6934b7605d1738.13842860",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #43 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=43",
+        "read": true,
+        "created_at": "2025-12-07 00:08:16"
+    },
+    {
+        "id": "notif_6934b78f7e5840.07919436",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #44 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=44",
+        "read": true,
+        "created_at": "2025-12-07 00:09:03"
+    },
+    {
+        "id": "notif_6934bbfaa45382.86926910",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #45 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=45",
+        "read": true,
+        "created_at": "2025-12-07 00:27:54"
+    },
+    {
+        "id": "notif_6934bf0f45fcf9.32941566",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #46 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=46",
+        "read": true,
+        "created_at": "2025-12-07 00:41:03"
+    },
+    {
+        "id": "notif_6934c527b4f173.95006506",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #47 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=47",
+        "read": true,
+        "created_at": "2025-12-07 01:07:03"
+    },
+    {
+        "id": "notif_6934c9e0986b49.13224982",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #48 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=48",
+        "read": true,
+        "created_at": "2025-12-07 01:27:12"
+    },
+    {
+        "id": "notif_6934cae2ccb330.50599437",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #49 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=49",
+        "read": true,
+        "created_at": "2025-12-07 01:31:30"
+    },
+    {
+        "id": "notif_693574ea7d3249.75623972",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #20 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=20",
+        "read": true,
+        "created_at": "2025-12-07 13:36:58"
+    },
+    {
+        "id": "notif_6935760f6f06b1.66457068",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #21 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=21",
+        "read": true,
+        "created_at": "2025-12-07 13:41:51"
+    },
+    {
+        "id": "notif_693576ac08dee7.54182015",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #22 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=22",
+        "read": true,
+        "created_at": "2025-12-07 13:44:28"
+    },
+    {
+        "id": "notif_69358d979a4797.44049795",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #23 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=23",
+        "read": true,
+        "created_at": "2025-12-07 15:22:15"
+    },
+    {
+        "id": "notif_693596af5a4023.04644435",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #24 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=24",
+        "read": true,
+        "created_at": "2025-12-07 16:01:03"
+    },
+    {
+        "id": "notif_6935988c77c663.44746182",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #25 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=25",
+        "read": true,
+        "created_at": "2025-12-07 16:09:00"
+    },
+    {
+        "id": "notif_6935989ee3b5f4.61833644",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #25 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=25",
+        "read": true,
+        "created_at": "2025-12-07 16:09:18"
+    },
+    {
+        "id": "notif_693598a1158155.72522949",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #25 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=25",
+        "read": true,
+        "created_at": "2025-12-07 16:09:21"
+    },
+    {
+        "id": "notif_693598b8bded36.85684788",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #25 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=25",
+        "read": true,
+        "created_at": "2025-12-07 16:09:44"
+    },
+    {
+        "id": "notif_69359936d20c01.01209475",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #26 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=26",
+        "read": true,
+        "created_at": "2025-12-07 16:11:50"
+    },
+    {
+        "id": "notif_693599f9c6e890.25044103",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #27 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=27",
+        "read": true,
+        "created_at": "2025-12-07 16:15:05"
+    },
+    {
+        "id": "notif_6935b159df9239.58815952",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #28 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=28",
+        "read": true,
+        "created_at": "2025-12-07 17:54:49"
+    },
+    {
+        "id": "notif_693851604dc749.55868091",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #31 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=31",
+        "read": true,
+        "created_at": "2025-12-09 17:42:08"
+    },
+    {
+        "id": "notif_69385c8a078d64.11885733",
+        "user_id": 8,
+        "type": "success",
+        "message": "Votre demande de frais #31 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=31",
+        "read": true,
+        "created_at": "2025-12-09 18:29:46"
+    },
+    {
+        "id": "notif_69385c8c8b5298.67322382",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #31 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=31",
+        "read": true,
+        "created_at": "2025-12-09 18:29:48"
+    },
+    {
+        "id": "notif_69385e186f1677.18568334",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #32 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=32",
+        "read": true,
+        "created_at": "2025-12-09 18:36:24"
+    },
+    {
+        "id": "notif_693861eff2c176.83560179",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #33 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=33",
+        "read": true,
+        "created_at": "2025-12-09 18:52:47"
+    },
+    {
+        "id": "notif_693864284ab123.97455439",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #34 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=34",
+        "read": true,
+        "created_at": "2025-12-09 19:02:16"
+    },
+    {
+        "id": "notif_693865d959e369.81949482",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #35 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=35",
+        "read": true,
+        "created_at": "2025-12-09 19:09:29"
+    },
+    {
+        "id": "notif_6939d75c5315d1.49312360",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #45 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=45",
+        "read": true,
+        "created_at": "2025-12-10 21:26:04"
+    },
+    {
+        "id": "notif_6939d7809de4e3.64977133",
+        "user_id": 3,
+        "type": "warning",
+        "message": "L'employ\u00e9 zineb warit a modifi\u00e9 la demande #45, veuillez re-v\u00e9rifier.",
+        "link": "demandes.php?action=voir&id=45",
+        "read": true,
+        "created_at": "2025-12-10 21:26:40"
+    },
+    {
+        "id": "notif_6939e6b667e169.95129095",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #46 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=46",
+        "read": true,
+        "created_at": "2025-12-10 22:31:34"
+    },
+    {
+        "id": "notif_6939e740232474.34482644",
+        "user_id": 3,
+        "type": "warning",
+        "message": "L'employ\u00e9 zineb warit a modifi\u00e9 la demande #46, veuillez re-v\u00e9rifier.",
+        "link": "demandes.php?action=voir&id=46",
+        "read": true,
+        "created_at": "2025-12-10 22:33:52"
+    },
+    {
+        "id": "notif_693b10a24a29d8.18756995",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #47 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=47",
+        "read": true,
+        "created_at": "2025-12-11 19:42:42"
+    },
+    {
+        "id": "notif_693b16e6a18270.89797515",
+        "user_id": 3,
+        "type": "warning",
+        "message": "L'employ\u00e9 Jean Dupont a modifi\u00e9 la demande #47, veuillez re-v\u00e9rifier.",
+        "link": "demandes.php?action=voir&id=47",
+        "read": true,
+        "created_at": "2025-12-11 20:09:26"
+    },
+    {
+        "id": "notif_693b17dae98c31.09587034",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #48 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=48",
+        "read": true,
+        "created_at": "2025-12-11 20:13:30"
+    },
+    {
+        "id": "notif_693b1c66b3b457.11301138",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #49 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=49",
+        "read": true,
+        "created_at": "2025-12-11 20:32:54"
+    },
+    {
+        "id": "notif_693b1c7e2aabe3.18709659",
+        "user_id": 3,
+        "type": "warning",
+        "message": "L'employ\u00e9 Jean Dupont a modifi\u00e9 la demande #49, veuillez re-v\u00e9rifier.",
+        "link": "demandes.php?action=voir&id=49",
+        "read": true,
+        "created_at": "2025-12-11 20:33:18"
+    },
+    {
+        "id": "notif_693b2e9969bf35.49680523",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #50 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=50",
+        "read": true,
+        "created_at": "2025-12-11 21:50:33"
+    },
+    {
+        "id": "notif_693b59d20ebba9.54872733",
+        "user_id": 3,
+        "type": "warning",
+        "message": "L'employ\u00e9 Jean Dupont a modifi\u00e9 la demande #51, veuillez re-v\u00e9rifier.",
+        "link": "demandes.php?action=voir&id=51",
+        "read": true,
+        "created_at": "2025-12-12 00:54:58"
+    },
+    {
+        "id": "notif_693b5a51e92891.71226066",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #52 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=52",
+        "read": true,
+        "created_at": "2025-12-12 00:57:05"
+    },
+    {
+        "id": "notif_693bf10d3b1d14.40987856",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #53 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=53",
+        "read": true,
+        "created_at": "2025-12-12 11:40:13"
+    },
+    {
+        "id": "notif_693bf12c70d687.86571072",
+        "user_id": 3,
+        "type": "warning",
+        "message": "L'employ\u00e9 Jean Dupont a modifi\u00e9 la demande #53, veuillez re-v\u00e9rifier.",
+        "link": "demandes.php?action=voir&id=53",
+        "read": true,
+        "created_at": "2025-12-12 11:40:44"
+    },
+    {
+        "id": "notif_693bf2d8e78559.63816139",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #54 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=54",
+        "read": true,
+        "created_at": "2025-12-12 11:47:52"
+    },
+    {
+        "id": "notif_693c5f020579e2.03556534",
+        "user_id": 3,
+        "type": "warning",
+        "message": "L'employ\u00e9 zineb warit a modifi\u00e9 la demande #54, veuillez re-v\u00e9rifier.",
+        "link": "demandes.php?action=voir&id=54",
+        "read": true,
+        "created_at": "2025-12-12 19:29:22"
+    },
+    {
+        "id": "notif_693c6a3ae3c750.13138549",
+        "user_id": 12,
+        "type": "success",
+        "message": "Votre demande de frais #54 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=54",
+        "read": true,
+        "created_at": "2025-12-12 20:17:14"
+    },
+    {
+        "id": "notif_693c6a3cc73621.58170407",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #54 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=54",
+        "read": true,
+        "created_at": "2025-12-12 20:17:16"
+    },
+    {
+        "id": "notif_693c6ab8dc7924.02463271",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #53 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=53",
+        "read": true,
+        "created_at": "2025-12-12 20:19:20"
+    },
+    {
+        "id": "notif_693c6aba71bb55.33112144",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #53 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=53",
+        "read": true,
+        "created_at": "2025-12-12 20:19:22"
+    },
+    {
+        "id": "notif_693c6e1903aa75.65652671",
+        "user_id": 2,
+        "type": "danger",
+        "message": "Votre demande de frais #51 a \u00e9t\u00e9 rejet\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=51",
+        "read": true,
+        "created_at": "2025-12-12 20:33:45"
+    },
+    {
+        "id": "notif_693c755599e073.60848804",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #55 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=55",
+        "read": true,
+        "created_at": "2025-12-12 21:04:37"
+    },
+    {
+        "id": "notif_693c7584020dd3.52547057",
+        "user_id": 3,
+        "type": "warning",
+        "message": "L'employ\u00e9 zineb warit a modifi\u00e9 la demande #55, veuillez re-v\u00e9rifier.",
+        "link": "demandes.php?action=voir&id=55",
+        "read": true,
+        "created_at": "2025-12-12 21:05:24"
+    },
+    {
+        "id": "notif_693c75da1b9b02.78154788",
+        "user_id": 12,
+        "type": "danger",
+        "message": "Votre demande de frais #54 a \u00e9t\u00e9 rejet\u00e9e d\u00e9finitivement.",
+        "link": "..\/mes_demandes.php?action=voir&id=54",
+        "read": true,
+        "created_at": "2025-12-12 21:06:50"
+    },
+    {
+        "id": "notif_693c75fac40337.16558179",
+        "user_id": 12,
+        "type": "success",
+        "message": "Votre demande de frais #55 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=55",
+        "read": true,
+        "created_at": "2025-12-12 21:07:22"
+    },
+    {
+        "id": "notif_693c75fcaa0f12.78543046",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #55 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=55",
+        "read": true,
+        "created_at": "2025-12-12 21:07:24"
+    },
+    {
+        "id": "notif_693c76c26dcb69.31031054",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #56 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=56",
+        "read": true,
+        "created_at": "2025-12-12 21:10:42"
+    },
+    {
+        "id": "notif_693c77336da235.26958726",
+        "user_id": 12,
+        "type": "success",
+        "message": "Votre demande de frais #56 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=56",
+        "read": true,
+        "created_at": "2025-12-12 21:12:35"
+    },
+    {
+        "id": "notif_693c77350f2f74.36189570",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #56 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=56",
+        "read": true,
+        "created_at": "2025-12-12 21:12:37"
+    },
+    {
+        "id": "notif_693c783746ddd5.95879226",
+        "user_id": 12,
+        "type": "danger",
+        "message": "Votre demande de frais #46 a \u00e9t\u00e9 rejet\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=46",
+        "read": true,
+        "created_at": "2025-12-12 21:16:55"
+    },
+    {
+        "id": "notif_693c78972f5ce6.28019988",
+        "user_id": 12,
+        "type": "success",
+        "message": "Votre demande de frais #56 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/mes_demandes.php?action=voir&id=56",
+        "read": true,
+        "created_at": "2025-12-12 21:18:31"
+    },
+    {
+        "id": "notif_693c78bab16754.63473440",
+        "user_id": 12,
+        "type": "info",
+        "message": "Votre demande de frais #55 est en cours de traitement par l'administration.",
+        "link": "..\/mes_demandes.php?action=voir&id=55",
+        "read": true,
+        "created_at": "2025-12-12 21:19:06"
+    },
+    {
+        "id": "notif_693c7998069577.19234777",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #57 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=57",
+        "read": true,
+        "created_at": "2025-12-12 21:22:48"
+    },
+    {
+        "id": "notif_693c79b2af9570.48566215",
+        "user_id": 12,
+        "type": "success",
+        "message": "Votre demande de frais #57 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=57",
+        "read": true,
+        "created_at": "2025-12-12 21:23:14"
+    },
+    {
+        "id": "notif_693c79b432fcf9.48178404",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #57 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=57",
+        "read": true,
+        "created_at": "2025-12-12 21:23:16"
+    },
+    {
+        "id": "notif_693c79e3691139.99126607",
+        "user_id": 12,
+        "type": "success",
+        "message": "Votre demande de frais #57 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/mes_demandes.php?action=voir&id=57",
+        "read": true,
+        "created_at": "2025-12-12 21:24:03"
+    },
+    {
+        "id": "notif_693c7fe4da8346.15151549",
+        "user_id": 3,
+        "type": "warning",
+        "message": "L'employ\u00e9 asmae ourrai a modifi\u00e9 la demande #47, veuillez re-v\u00e9rifier.",
+        "link": "demandes.php?action=voir&id=47",
+        "read": true,
+        "created_at": "2025-12-12 21:49:40"
+    },
+    {
+        "id": "notif_693c80691d4d15.26270846",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #58 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=58",
+        "read": true,
+        "created_at": "2025-12-12 21:51:53"
+    },
+    {
+        "id": "notif_693c8543c33b81.82108727",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #59 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=59",
+        "read": true,
+        "created_at": "2025-12-12 22:12:35"
+    },
+    {
+        "id": "notif_693c87ecc0c5c5.95247842",
+        "user_id": 3,
+        "type": "warning",
+        "message": "L'employ\u00e9 asmae ourrai a modifi\u00e9 la demande #59, veuillez re-v\u00e9rifier.",
+        "link": "demandes.php?action=voir&id=59",
+        "read": true,
+        "created_at": "2025-12-12 22:23:56"
+    },
+    {
+        "id": "notif_693c8850c59484.72690897",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #60 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=60",
+        "read": true,
+        "created_at": "2025-12-12 22:25:36"
+    },
+    {
+        "id": "notif_693c8883139f38.37503570",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #60 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=60",
+        "read": true,
+        "created_at": "2025-12-12 22:26:27"
+    },
+    {
+        "id": "notif_693c8884b17368.58816177",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #60 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=60",
+        "read": true,
+        "created_at": "2025-12-12 22:26:28"
+    },
+    {
+        "id": "notif_693c8e38910d35.32274533",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #60 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=60",
+        "read": true,
+        "created_at": "2025-12-12 22:50:48"
+    },
+    {
+        "id": "notif_693cb1117b4904.49818720",
+        "user_id": 12,
+        "type": "danger",
+        "message": "Votre demande de frais #55 a \u00e9t\u00e9 rejet\u00e9e d\u00e9finitivement.",
+        "link": "..\/mes_demandes.php?action=voir&id=55",
+        "read": false,
+        "created_at": "2025-12-13 01:19:29"
+    },
+    {
+        "id": "notif_693cb120ecb0c8.98372343",
+        "user_id": 11,
+        "type": "success",
+        "message": "Votre demande de frais #38 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/mes_demandes.php?action=voir&id=38",
+        "read": false,
+        "created_at": "2025-12-13 01:19:44"
+    },
+    {
+        "id": "notif_693cb1691a0381.67670779",
+        "user_id": 8,
+        "type": "info",
+        "message": "Votre demande de frais #10 est en cours de traitement par l'administration.",
+        "link": "..\/mes_demandes.php?action=voir&id=10",
+        "read": false,
+        "created_at": "2025-12-13 01:20:57"
+    },
+    {
+        "id": "notif_693cba639c8b22.81203478",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #53 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/mes_demandes.php?action=voir&id=53",
+        "read": true,
+        "created_at": "2025-12-13 01:59:15"
+    },
+    {
+        "id": "notif_693cc22a962ef7.27285884",
+        "user_id": 3,
+        "type": "warning",
+        "message": "L'employ\u00e9 asmae ourrai a modifi\u00e9 la demande #59, veuillez re-v\u00e9rifier.",
+        "link": "demandes.php?action=voir&id=59",
+        "read": true,
+        "created_at": "2025-12-13 02:32:26"
+    },
+    {
+        "id": "notif_693cc30438eaa4.74567157",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #61 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=61",
+        "read": true,
+        "created_at": "2025-12-13 02:36:04"
+    },
+    {
+        "id": "notif_693cc354b563e9.82103818",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #61 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=61",
+        "read": true,
+        "created_at": "2025-12-13 02:37:24"
+    },
+    {
+        "id": "notif_693cc357832d93.11582401",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #61 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=61",
+        "read": true,
+        "created_at": "2025-12-13 02:37:27"
+    },
+    {
+        "id": "notif_693cc35a6664f8.40454489",
+        "user_id": 13,
+        "type": "info",
+        "message": "Nouvelle demande #61 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=61",
+        "read": false,
+        "created_at": "2025-12-13 02:37:30"
+    },
+    {
+        "id": "notif_693cc4032c5d85.69680053",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #61 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=61",
+        "read": true,
+        "created_at": "2025-12-13 02:40:19"
+    },
+    {
+        "id": "notif_693d6fb804f652.12955331",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #59 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=59",
+        "read": true,
+        "created_at": "2025-12-13 14:52:56"
+    },
+    {
+        "id": "notif_693d6fba0b5488.04536883",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #59 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=59",
+        "read": false,
+        "created_at": "2025-12-13 14:52:58"
+    },
+    {
+        "id": "notif_693d6fbbba4729.49345664",
+        "user_id": 13,
+        "type": "info",
+        "message": "Nouvelle demande #59 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=59",
+        "read": false,
+        "created_at": "2025-12-13 14:52:59"
+    },
+    {
+        "id": "notif_693d812a9b3fa3.14496018",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #62 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=62",
+        "read": true,
+        "created_at": "2025-12-13 16:07:22"
+    },
+    {
+        "id": "notif_693d814bd30a63.62375222",
+        "user_id": 3,
+        "type": "warning",
+        "message": "L'employ\u00e9 asmae ourrai a modifi\u00e9 la demande #62, veuillez re-v\u00e9rifier.",
+        "link": "demandes.php?action=voir&id=62",
+        "read": true,
+        "created_at": "2025-12-13 16:07:55"
+    },
+    {
+        "id": "notif_693d818aa6e347.70822447",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #62 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=62",
+        "read": true,
+        "created_at": "2025-12-13 16:08:58"
+    },
+    {
+        "id": "notif_693d818c36f244.35827585",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #62 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=62",
+        "read": false,
+        "created_at": "2025-12-13 16:09:00"
+    },
+    {
+        "id": "notif_693d818e3262d5.61623239",
+        "user_id": 13,
+        "type": "info",
+        "message": "Nouvelle demande #62 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=62",
+        "read": false,
+        "created_at": "2025-12-13 16:09:02"
+    },
+    {
+        "id": "notif_693d832e6f25c9.06510290",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #58 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=58",
+        "read": false,
+        "created_at": "2025-12-13 16:15:58"
+    },
+    {
+        "id": "notif_693d83324d0408.75784371",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #58 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=58",
+        "read": false,
+        "created_at": "2025-12-13 16:16:02"
+    },
+    {
+        "id": "notif_693d83343d7035.39369607",
+        "user_id": 13,
+        "type": "info",
+        "message": "Nouvelle demande #58 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=58",
+        "read": false,
+        "created_at": "2025-12-13 16:16:04"
+    },
+    {
+        "id": "notif_693d8572bd0af6.29027886",
+        "user_id": 3,
+        "type": "warning",
+        "message": "Nouvelle demande de frais #63 \u00e0 valider.",
+        "link": "..\/..\/..\/app\/Views\/manager\/demandes.php?action=voir&id=63",
+        "read": false,
+        "created_at": "2025-12-13 16:25:38"
+    },
+    {
+        "id": "notif_693d858e5a5a74.11828870",
+        "user_id": 3,
+        "type": "warning",
+        "message": "L'employ\u00e9 asmae ourrai a modifi\u00e9 la demande #63, veuillez re-v\u00e9rifier.",
+        "link": "demandes.php?action=voir&id=63",
+        "read": true,
+        "created_at": "2025-12-13 16:26:06"
+    },
+    {
+        "id": "notif_693d85bf9f59d2.21826760",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #63 a \u00e9t\u00e9 valid\u00e9e par votre manager.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=63",
+        "read": false,
+        "created_at": "2025-12-13 16:26:55"
+    },
+    {
+        "id": "notif_693d85c13e9996.91077020",
+        "user_id": 7,
+        "type": "info",
+        "message": "Nouvelle demande #63 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=63",
+        "read": true,
+        "created_at": "2025-12-13 16:26:57"
+    },
+    {
+        "id": "notif_693d85c2a18f13.18933777",
+        "user_id": 13,
+        "type": "info",
+        "message": "Nouvelle demande #63 valid\u00e9e par le manager et en attente de traitement.",
+        "link": "..\/..\/..\/app\/Views\/admin\/details_demande.php?id=63",
+        "read": false,
+        "created_at": "2025-12-13 16:26:58"
+    },
+    {
+        "id": "notif_693d864e480382.30472329",
+        "user_id": 2,
+        "type": "success",
+        "message": "Votre demande de frais #63 a \u00e9t\u00e9 approuv\u00e9e et rembours\u00e9e.",
+        "link": "..\/..\/..\/app\/Views\/employee\/mes_demandes.php?action=voir&id=63",
+        "read": false,
+        "created_at": "2025-12-13 16:29:18"
+    }
+]

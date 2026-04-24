@@ -12,7 +12,7 @@ pipeline {
             steps {
                 deleteDir()
                 git branch: 'main', url: 'https://github.com/zinebwww/application.git'
-                sh 'ls -la'  # Vérifier que src/ existe
+                sh 'ls -la'  
                 sh 'ls -la src/'
             }
         }

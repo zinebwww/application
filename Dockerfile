@@ -6,10 +6,11 @@ RUN apt-get update && apt-get install -y sqlite3 libsqlite3-dev \
 
 # Copier l'application
 COPY src/ /var/www/html/
-COPY data/ /var/www/data/
 
-# Permissions
-RUN chown -R www-data:www-data /var/www/html /var/www/data && \
+# Créer le dossier data et donner les permissions
+RUN mkdir -p /var/www/data && \
+    chown -R www-data:www-data /var/www/html /var/www/data && \
+    chmod -R 755 /var/www/html && \
     chmod -R 777 /var/www/data
 
 EXPOSE 80

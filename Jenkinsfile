@@ -25,7 +25,7 @@ pipeline {
             }
         }
 
-        stage('🛡️ Trivy (optionnel)') {
+        stage('🛡️ Trivy') {
             steps {
                 script {
                     try {
@@ -33,7 +33,7 @@ pipeline {
                             sh "trivy fs --skip-db-update --scanners vuln,misconfig --format table . || echo 'Trivy non dispo'"
                         }
                     } catch (err) {
-                        echo "⚠️ Trivy ignoré"
+                        echo "Trivy ignoré"
                     }
                 }
             }
@@ -45,7 +45,7 @@ pipeline {
             }
         }
 
-        stage('📦 Import image dans k3d') {
+        stage('📦 Import dans k3d') {
             steps {
                 sh "k3d image import ${IMAGE_NAME} -c ${CLUSTER_NAME}"
             }
@@ -65,10 +65,10 @@ pipeline {
 
     post {
         success {
-            echo "✅ Application déployée avec succès sur http://localhost:8888"
+            echo "Application déployée sur http://localhost:8888"
         }
         failure {
-            echo "❌ Échec du pipeline"
+            echo "Échec du pipeline"
         }
     }
 }

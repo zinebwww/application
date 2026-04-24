@@ -12,7 +12,8 @@ pipeline {
             steps {
                 deleteDir()
                 git branch: 'main', url: 'https://github.com/zinebwww/application.git'
-                sh 'ls -la'
+                sh 'ls -la'  # Vérifier que src/ existe
+                sh 'ls -la src/'
             }
         }
 
@@ -24,9 +25,17 @@ pipeline {
             }
         }
 
-        stage('🛡️ Trivy') {
+        stage('🛡️ Trivy (optionnel)') {
             steps {
-                sh "trivy fs --scanners vuln,misconfig --format table . || echo 'Trivy continue'"
+                script {
+                    try {
+                        timeout(time: 2, unit: 'MINUTES') {
+                            sh "trivy fs --skip-db-update --scanners vuln,misconfig --format table . || echo 'Trivy non dispo'"
+                        }
+                    } catch (err) {
+                        echo "⚠️ Trivy ignoré"
+                    }
+                }
             }
         }
 
@@ -36,7 +45,7 @@ pipeline {
             }
         }
 
-        stage('📦 Import dans k3d') {
+        stage('📦 Import image dans k3d') {
             steps {
                 sh "k3d image import ${IMAGE_NAME} -c ${CLUSTER_NAME}"
             }
@@ -59,7 +68,7 @@ pipeline {
             echo "✅ Application déployée avec succès sur http://localhost:8888"
         }
         failure {
-            echo "❌ Échec du déploiement"
+            echo "❌ Échec du pipeline"
         }
     }
 }

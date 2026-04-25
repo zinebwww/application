@@ -1,5 +1,5 @@
 <?php
-// Configuration de la base de données SQLite
+// Créer le dossier data s'il n'existe pas
 $data_dir = __DIR__ . '/../data';
 if (!is_dir($data_dir)) {
     mkdir($data_dir, 0777, true);
@@ -9,7 +9,7 @@ $db_file = $data_dir . '/absences.db';
 $db = new PDO('sqlite:' . $db_file);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// Création des tables si elles n'existent pas
+// Création des tables
 $db->exec("
     CREATE TABLE IF NOT EXISTS employes (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -41,11 +41,6 @@ if ($count == 0) {
         ('BENNANI', 'Sara', 'sara@example.com', 'Finance'),
         ('CHADLI', 'Omar', 'omar@example.com', 'Marketing'),
         ('NAJIB', 'Leila', 'leila@example.com', 'IT');
-
-        INSERT INTO absences (employe_id, date_debut, date_fin, motif, statut) VALUES
-        (1, date('now', '-5 days'), date('now', '-3 days'), 'Congé maladie', 'Approuvé'),
-        (2, date('now', '+1 days'), date('now', '+2 days'), 'Congé personnel', 'En attente'),
-        (3, date('now', '+7 days'), date('now', '+11 days'), 'Vacances', 'Approuvé');
     ");
 }
 
@@ -69,6 +64,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $message = "❌ Demande rejetée!";
             break;
     }
+    // Rediriger pour éviter la resoumission du formulaire
+    header("Location: " . $_SERVER['REQUEST_URI']);
+    exit;
 }
 
 // Récupération des données
@@ -238,45 +236,61 @@ $stats = $db->query("
         
         <div class="card">
             <h2>📋 Liste des demandes</h2>
-            <table>
-                <thead><tr><th>Employé</th><th>Département</th><th>Dates</th><th>Motif</th><th>Statut</th><th>Actions</th></tr></thead>
-                <tbody>
-                    <?php foreach ($absences as $a): ?>
-                    <tr>
-                        <td><?= $a['prenom'] . ' ' . $a['nom'] ?></td>
-                        <td><?= $a['departement'] ?></td>
-                        <td><?= date('d/m/Y', strtotime($a['date_debut'])) ?> → <?= date('d/m/Y', strtotime($a['date_fin'])) ?></td>
-                        <td><?= htmlspecialchars(substr($a['motif'], 0, 40)) ?></td>
-                        <td>
-                            <span class="badge badge-<?= $a['statut'] === 'Approuvé' ? 'success' : ($a['statut'] === 'En attente' ? 'warning' : 'danger') ?>">
-                                <?= $a['statut'] ?>
-                            </span>
-                        </td>
-                        <td>
-                            <?php if ($a['statut'] === 'En attente'): ?>
-                                <form method="POST" style="display:inline">
-                                    <input type="hidden" name="action" value="approuver">
-                                    <input type="hidden" name="absence_id" value="<?= $a['id'] ?>">
-                                    <button type="submit" class="btn-sm btn-success">✓</button>
-                                </form>
-                                <form method="POST" style="display:inline">
-                                    <input type="hidden" name="action" value="rejeter">
-                                    <input type="hidden" name="absence_id" value="<?= $a['id'] ?>">
-                                    <button type="submit" class="btn-sm btn-danger">✗</button>
-                                </form>
-                            <?php else: ?>
-                                -
-                            <?php endif; ?>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Employé</th>
+                            <th>Département</th>
+                            <th>Dates</th>
+                            <th>Motif</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (empty($absences)): ?>
+                            <tr><td colspan="6" style="text-align: center;">Aucune demande d'absence trouvée</td></tr>
+                        <?php else: ?>
+                            <?php foreach ($absences as $a): ?>
+                                <tr>
+                                    <td><?= $a['prenom'] . ' ' . $a['nom'] ?></td>
+                                    <td><?= $a['departement'] ?></td>
+                                    <td><?= date('d/m/Y', strtotime($a['date_debut'])) ?> → <?= date('d/m/Y', strtotime($a['date_fin'])) ?></td>
+                                    <td><?= htmlspecialchars(substr($a['motif'], 0, 40)) ?></td>
+                                    <td>
+                                        <span class="badge badge-<?= $a['statut'] === 'Approuvé' ? 'success' : ($a['statut'] === 'En attente' ? 'warning' : 'danger') ?>">
+                                            <?= $a['statut'] ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <?php if ($a['statut'] === 'En attente'): ?>
+                                            <form method="POST" style="display:inline">
+                                                <input type="hidden" name="action" value="approuver">
+                                                <input type="hidden" name="absence_id" value="<?= $a['id'] ?>">
+                                                <button type="submit" class="btn-sm btn-success">✓</button>
+                                            </form>
+                                            <form method="POST" style="display:inline">
+                                                <input type="hidden" name="action" value="rejeter">
+                                                <input type="hidden" name="absence_id" value="<?= $a['id'] ?>">
+                                                <button type="submit" class="btn-sm btn-danger">✗</button>
+                                            </form>
+                                        <?php else: ?>
+                                            -
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
         
         <div class="footer">
-            <p>Jenkins → SonarQube → Trivy → Docker → k3d</p>
+            <p>Jenkins → SonarQube → Trivy → Docker → k3d (Kubernetes)</p>
         </div>
     </div>
 </body>
 </html>
+<?php // Auto-deploy test

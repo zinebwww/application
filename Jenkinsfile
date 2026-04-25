@@ -43,38 +43,84 @@ pipeline {
             }
         }
 
-        stage('📦 Import image dans clusters') {
+        stage('📦 Export image Docker') {
             steps {
-                script {
-                    def clusters = ["cluster-prod-1", "cluster-prod-2", "cluster-dr"]
-                    for (cluster in clusters) {
-                        sh """
-                            docker save ${IMAGE_NAME} -o /tmp/${IMAGE_NAME}.tar
-                            docker cp /tmp/${IMAGE_NAME}.tar ${cluster}-server-0:/tmp/
-                            docker exec ${cluster}-server-0 ctr image import /tmp/${IMAGE_NAME}.tar || true
-                            rm /tmp/${IMAGE_NAME}.tar
-                        """
-                    }
-                }
+                sh "docker save ${IMAGE_NAME} -o /tmp/absence-app.tar"
             }
         }
 
-        stage('🚀 Déploiement sur clusters') {
+        stage('📦 Import dans cluster-prod-1') {
             steps {
-                script {
-                    def contexts = ["prod-1", "prod-2", "dr"]
-                    for (ctx in contexts) {
-                        sh """
-                            kubectl config use-context ${ctx}
-                            kubectl delete deployment php-app-deployment --ignore-not-found
-                            kubectl delete service php-service --ignore-not-found
-                            kubectl create deployment php-app-deployment --image=${IMAGE_NAME} --port=80
-                            kubectl expose deployment php-app-deployment --type=NodePort --port=80 --target-port=80 --name=php-service
-                            kubectl scale deployment php-app-deployment --replicas=2
-                            kubectl patch deployment php-app-deployment -p '{"spec":{"template":{"spec":{"containers":[{"name":"absence-app","imagePullPolicy":"Never"}]}}}}'
-                        """
-                    }
-                }
+                sh """
+                    docker cp /tmp/absence-app.tar k3d-cluster-prod-1-server-0:/tmp/
+                    docker exec k3d-cluster-prod-1-server-0 ctr image import /tmp/absence-app.tar || true
+                """
+            }
+        }
+
+        stage('📦 Import dans cluster-prod-2') {
+            steps {
+                sh """
+                    docker cp /tmp/absence-app.tar k3d-cluster-prod-2-server-0:/tmp/
+                    docker exec k3d-cluster-prod-2-server-0 ctr image import /tmp/absence-app.tar || true
+                """
+            }
+        }
+
+        stage('📦 Import dans cluster-dr') {
+            steps {
+                sh """
+                    docker cp /tmp/absence-app.tar k3d-cluster-dr-server-0:/tmp/
+                    docker exec k3d-cluster-dr-server-0 ctr image import /tmp/absence-app.tar || true
+                """
+            }
+        }
+
+        stage('🚀 Déploiement sur prod-1') {
+            steps {
+                sh """
+                    kubectl config use-context prod-1
+                    kubectl delete deployment php-app-deployment --ignore-not-found
+                    kubectl delete service php-service --ignore-not-found
+                    kubectl create deployment php-app-deployment --image=${IMAGE_NAME} --port=80
+                    kubectl expose deployment php-app-deployment --type=NodePort --port=80 --target-port=80 --name=php-service
+                    kubectl scale deployment php-app-deployment --replicas=2
+                    kubectl patch deployment php-app-deployment -p '{"spec":{"template":{"spec":{"containers":[{"name":"absence-app","imagePullPolicy":"Never"}]}}}}'
+                """
+            }
+        }
+
+        stage('🚀 Déploiement sur prod-2') {
+            steps {
+                sh """
+                    kubectl config use-context prod-2
+                    kubectl delete deployment php-app-deployment --ignore-not-found
+                    kubectl delete service php-service --ignore-not-found
+                    kubectl create deployment php-app-deployment --image=${IMAGE_NAME} --port=80
+                    kubectl expose deployment php-app-deployment --type=NodePort --port=80 --target-port=80 --name=php-service
+                    kubectl scale deployment php-app-deployment --replicas=2
+                    kubectl patch deployment php-app-deployment -p '{"spec":{"template":{"spec":{"containers":[{"name":"absence-app","imagePullPolicy":"Never"}]}}}}'
+                """
+            }
+        }
+
+        stage('🚀 Déploiement sur dr') {
+            steps {
+                sh """
+                    kubectl config use-context dr
+                    kubectl delete deployment php-app-deployment --ignore-not-found
+                    kubectl delete service php-service --ignore-not-found
+                    kubectl create deployment php-app-deployment --image=${IMAGE_NAME} --port=80
+                    kubectl expose deployment php-app-deployment --type=NodePort --port=80 --target-port=80 --name=php-service
+                    kubectl scale deployment php-app-deployment --replicas=2
+                    kubectl patch deployment php-app-deployment -p '{"spec":{"template":{"spec":{"containers":[{"name":"absence-app","imagePullPolicy":"Never"}]}}}}'
+                """
+            }
+        }
+
+        stage('🧹 Nettoyage') {
+            steps {
+                sh "rm -f /tmp/absence-app.tar"
             }
         }
     }

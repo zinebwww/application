@@ -4,7 +4,6 @@ pipeline {
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
         IMAGE_NAME = "absence-app:latest"
-        CLUSTER_NAME = "devsecops-cluster"
     }
 
     stages {
@@ -12,8 +11,7 @@ pipeline {
             steps {
                 deleteDir()
                 git branch: 'main', url: 'https://github.com/zinebwww/application.git'
-                sh 'ls -la'  
-                sh 'ls -la src/'
+                sh 'ls -la'
             }
         }
 
@@ -45,30 +43,51 @@ pipeline {
             }
         }
 
-        stage('📦 Import dans k3d') {
+        stage('📦 Import image dans clusters') {
             steps {
-                sh "k3d image import ${IMAGE_NAME} -c ${CLUSTER_NAME}"
+                script {
+                    def clusters = ["cluster-prod-1", "cluster-prod-2", "cluster-dr"]
+                    for (cluster in clusters) {
+                        sh """
+                            docker save ${IMAGE_NAME} -o /tmp/${IMAGE_NAME}.tar
+                            docker cp /tmp/${IMAGE_NAME}.tar ${cluster}-server-0:/tmp/
+                            docker exec ${cluster}-server-0 ctr image import /tmp/${IMAGE_NAME}.tar || true
+                            rm /tmp/${IMAGE_NAME}.tar
+                        """
+                    }
+                }
             }
         }
 
-        stage('🚀 Déploiement Kubernetes') {
+        stage('🚀 Déploiement sur clusters') {
             steps {
-                sh "kubectl delete deployment php-app-deployment --ignore-not-found"
-                sh "kubectl delete service php-service --ignore-not-found"
-                sh "kubectl create deployment php-app-deployment --image=${IMAGE_NAME} --port=80"
-                sh "kubectl expose deployment php-app-deployment --type=NodePort --port=80 --target-port=80 --name=php-service"
-                sh "kubectl scale deployment php-app-deployment --replicas=2"
-                sh "kubectl get pods"
+                script {
+                    def contexts = ["prod-1", "prod-2", "dr"]
+                    for (ctx in contexts) {
+                        sh """
+                            kubectl config use-context ${ctx}
+                            kubectl delete deployment php-app-deployment --ignore-not-found
+                            kubectl delete service php-service --ignore-not-found
+                            kubectl create deployment php-app-deployment --image=${IMAGE_NAME} --port=80
+                            kubectl expose deployment php-app-deployment --type=NodePort --port=80 --target-port=80 --name=php-service
+                            kubectl scale deployment php-app-deployment --replicas=2
+                            kubectl patch deployment php-app-deployment -p '{"spec":{"template":{"spec":{"containers":[{"name":"absence-app","imagePullPolicy":"Never"}]}}}}'
+                        """
+                    }
+                }
             }
         }
     }
 
     post {
         success {
-            echo "Application déployée sur http://localhost:8888"
+            echo "✅ Déploiement réussi sur les 3 clusters !"
+            echo "   - prod-1: http://localhost:8081"
+            echo "   - prod-2: http://localhost:8082"
+            echo "   - dr: http://localhost:8083"
         }
         failure {
-            echo "Échec du pipeline"
+            echo "❌ Échec du pipeline"
         }
     }
 }

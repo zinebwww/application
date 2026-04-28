@@ -299,3 +299,4 @@ $stats = $db->query("
 </div>
 </body>
 </html>
+<?php // Rebuild after context fix

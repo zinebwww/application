@@ -297,5 +297,3 @@ $stats = $db->query("
 <?php // Webhook test final
 <?php // Test webhook auto-deploy
 <?php // Test Git Hook auto-build
-<?php // Test avec token API
-<?php // Auto-build with token

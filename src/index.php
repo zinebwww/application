@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Créer le dossier data s'il n'existe pas
 $data_dir = __DIR__ . '/../data';
 if (!is_dir($data_dir)) {
@@ -49,9 +51,13 @@ $message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     switch ($_POST['action']) {
         case 'ajouter':
-            $stmt = $db->prepare("INSERT INTO absences (employe_id, date_debut, date_fin, motif) VALUES (?, ?, ?, ?)");
-            $stmt->execute([$_POST['employe_id'], $_POST['date_debut'], $_POST['date_fin'], $_POST['motif']]);
-            $message = "✅ Demande ajoutée avec succès!";
+            if (!empty($_POST['employe_id']) && !empty($_POST['date_debut']) && !empty($_POST['date_fin']) && !empty($_POST['motif'])) {
+                $stmt = $db->prepare("INSERT INTO absences (employe_id, date_debut, date_fin, motif) VALUES (?, ?, ?, ?)");
+                $stmt->execute([$_POST['employe_id'], $_POST['date_debut'], $_POST['date_fin'], $_POST['motif']]);
+                $message = "✅ Demande ajoutée avec succès!";
+            } else {
+                $message = "❌ Tous les champs sont obligatoires!";
+            }
             break;
         case 'approuver':
             $stmt = $db->prepare("UPDATE absences SET statut = 'Approuvé' WHERE id = ?");
@@ -188,114 +194,108 @@ $stats = $db->query("
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🏢 Gestion des Absences</h1>
-            <p>Déployé via Jenkins + k3d | Pipeline DevSecOps</p>
-        </div>
-        
-        <?php if ($message): ?>
-            <div class="message"><?= htmlspecialchars($message) ?></div>
-        <?php endif; ?>
-        
-        <div class="stats">
-            <div class="stat-card"><h3>Total</h3><div class="number"><?= $stats['total'] ?></div></div>
-            <div class="stat-card"><h3>Approuvées</h3><div class="number" style="color:#28a745"><?= $stats['approuve'] ?></div></div>
-            <div class="stat-card"><h3>En attente</h3><div class="number" style="color:#ffc107"><?= $stats['en_attente'] ?></div></div>
-            <div class="stat-card"><h3>Rejetées</h3><div class="number" style="color:#dc3545"><?= $stats['rejete'] ?></div></div>
-        </div>
-        
-        <div class="card">
-            <h2>➕ Nouvelle demande</h2>
-            <form method="POST">
-                <input type="hidden" name="action" value="ajouter">
-                <div class="form-group">
-                    <label>Employé</label>
-                    <select name="employe_id" required>
-                        <option value="">-- Sélectionner --</option>
-                        <?php foreach ($employes as $e): ?>
-                            <option value="<?= $e['id'] ?>"><?= $e['prenom'] . ' ' . $e['nom'] ?> (<?= $e['departement'] ?>)</option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Date début</label>
-                    <input type="date" name="date_debut" required>
-                </div>
-                <div class="form-group">
-                    <label>Date fin</label>
-                    <input type="date" name="date_fin" required>
-                </div>
-                <div class="form-group">
-                    <label>Motif</label>
-                    <textarea name="motif" rows="3" required></textarea>
-                </div>
-                <button type="submit">Soumettre</button>
-            </form>
-        </div>
-        
-        <div class="card">
-            <h2>📋 Liste des demandes</h2>
-            <div style="overflow-x: auto;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Employé</th>
-                            <th>Département</th>
-                            <th>Dates</th>
-                            <th>Motif</th>
-                            <th>Statut</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if (empty($absences)): ?>
-                            <tr><td colspan="6" style="text-align: center;">Aucune demande d'absence trouvée</td></tr>
-                        <?php else: ?>
-                            <?php foreach ($absences as $a): ?>
-                                <tr>
-                                    <td><?= $a['prenom'] . ' ' . $a['nom'] ?></td>
-                                    <td><?= $a['departement'] ?></td>
-                                    <td><?= date('d/m/Y', strtotime($a['date_debut'])) ?> → <?= date('d/m/Y', strtotime($a['date_fin'])) ?></td>
-                                    <td><?= htmlspecialchars(substr($a['motif'], 0, 40)) ?></td>
-                                    <td>
-                                        <span class="badge badge-<?= $a['statut'] === 'Approuvé' ? 'success' : ($a['statut'] === 'En attente' ? 'warning' : 'danger') ?>">
-                                            <?= $a['statut'] ?>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <?php if ($a['statut'] === 'En attente'): ?>
-                                            <form method="POST" style="display:inline">
-                                                <input type="hidden" name="action" value="approuver">
-                                                <input type="hidden" name="absence_id" value="<?= $a['id'] ?>">
-                                                <button type="submit" class="btn-sm btn-success">✓</button>
-                                            </form>
-                                            <form method="POST" style="display:inline">
-                                                <input type="hidden" name="action" value="rejeter">
-                                                <input type="hidden" name="absence_id" value="<?= $a['id'] ?>">
-                                                <button type="submit" class="btn-sm btn-danger">✗</button>
-                                            </form>
-                                        <?php else: ?>
-                                            -
-                                        <?php endif; ?>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
+<div class="container">
+    <div class="header">
+        <h1>🏢 Gestion des Absences</h1>
+        <p>Déployé via Jenkins + k3d | Pipeline DevSecOps</p>
+    </div>
+
+    <?php if ($message): ?>
+        <div class="message"><?= htmlspecialchars($message) ?></div>
+    <?php endif; ?>
+
+    <div class="stats">
+        <div class="stat-card"><h3>Total</h3><div class="number"><?= $stats['total'] ?></div></div>
+        <div class="stat-card"><h3>Approuvées</h3><div class="number" style="color:#28a745"><?= $stats['approuve'] ?></div></div>
+        <div class="stat-card"><h3>En attente</h3><div class="number" style="color:#ffc107"><?= $stats['en_attente'] ?></div></div>
+        <div class="stat-card"><h3>Rejetées</h3><div class="number" style="color:#dc3545"><?= $stats['rejete'] ?></div></div>
+    </div>
+
+    <div class="card">
+        <h2>➕ Nouvelle demande</h2>
+        <form method="POST">
+            <input type="hidden" name="action" value="ajouter">
+            <div class="form-group">
+                <label>Employé</label>
+                <select name="employe_id" required>
+                    <option value="">-- Sélectionner --</option>
+                    <?php foreach ($employes as $e): ?>
+                        <option value="<?= $e['id'] ?>"><?= $e['prenom'] . ' ' . $e['nom'] ?> (<?= $e['departement'] ?>)</option>
+                    <?php endforeach; ?>
+                </select>
             </div>
-        </div>
-        
-        <div class="footer">
-            <p>Jenkins → SonarQube → Trivy → Docker → k3d (Kubernetes)</p>
+            <div class="form-group">
+                <label>Date début</label>
+                <input type="date" name="date_debut" required>
+            </div>
+            <div class="form-group">
+                <label>Date fin</label>
+                <input type="date" name="date_fin" required>
+            </div>
+            <div class="form-group">
+                <label>Motif</label>
+                <textarea name="motif" rows="3" required></textarea>
+            </div>
+            <button type="submit">Soumettre</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>📋 Liste des demandes</h2>
+        <div style="overflow-x: auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Employé</th>
+                        <th>Département</th>
+                        <th>Dates</th>
+                        <th>Motif</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (empty($absences)): ?>
+                        <tr><td colspan="6" style="text-align: center;">Aucune demande d'absence trouvée</td></tr>
+                    <?php else: ?>
+                        <?php foreach ($absences as $a): ?>
+                        <tr>
+                            <td><?= $a['prenom'] . ' ' . $a['nom'] ?></td>
+                            <td><?= $a['departement'] ?></td>
+                            <td><?= date('d/m/Y', strtotime($a['date_debut'])) ?> → <?= date('d/m/Y', strtotime($a['date_fin'])) ?></td>
+                            <td><?= htmlspecialchars(substr($a['motif'], 0, 40)) ?></td>
+                            <td>
+                                <span class="badge <?= $a['statut'] === 'Approuvé' ? 'badge-success' : ($a['statut'] === 'En attente' ? 'badge-warning' : 'badge-danger') ?>">
+                                    <?= $a['statut'] ?>
+                                </span>
+                            </td>
+                            <td>
+                                <?php if ($a['statut'] === 'En attente'): ?>
+                                    <form method="POST" style="display:inline">
+                                        <input type="hidden" name="action" value="approuver">
+                                        <input type="hidden" name="absence_id" value="<?= $a['id'] ?>">
+                                        <button type="submit" class="btn-sm btn-success">✓</button>
+                                    </form>
+                                    <form method="POST" style="display:inline">
+                                        <input type="hidden" name="action" value="rejeter">
+                                        <input type="hidden" name="absence_id" value="<?= $a['id'] ?>">
+                                        <button type="submit" class="btn-sm btn-danger">✗</button>
+                                    </form>
+                                <?php else: ?>
+                                    -
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </tbody>
+            </table>
         </div>
     </div>
+
+    <div class="footer">
+        <p>Jenkins → SonarQube → Trivy → Docker → k3d (Kubernetes)</p>
+    </div>
+</div>
 </body>
 </html>
-<?php // Auto-deploy test
-<?php // Webhook test final
-<?php // Test webhook auto-deploy
-<?php // Test Git Hook auto-build
-<?php // test auto-build final
-<?php // Build auto final

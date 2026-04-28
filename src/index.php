@@ -300,3 +300,4 @@ $stats = $db->query("
 </body>
 </html>
 <?php // Rebuild after context fix
+<?php // Kubeconfig fixed in Jenkins

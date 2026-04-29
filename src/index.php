@@ -1,6 +1,6 @@
 <?php
 session_start();
-// Test automatisation via smee.io - le build doit se déclencher
+
 // Créer le dossier data s'il n'existe pas
 $data_dir = __DIR__ . '/../data';
 if (!is_dir($data_dir)) {

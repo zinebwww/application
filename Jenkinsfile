@@ -23,7 +23,6 @@ pipeline {
             steps {
                 deleteDir()
                 checkout scm
-                sh "ls -la"
             }
         }
 
@@ -38,9 +37,9 @@ pipeline {
         stage('🛡️ Sécurité - Scan Trivy') {
             steps {
                 script {
-                    echo "Lancement du scan de sécurité sur l'image..."
-                    // On utilise l'image Docker de Trivy pour scanner l'image qu'on va builder
-                    sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL ${IMAGE_NAME} || echo 'Des vulnérabilités ont été détectées'"
+                    echo "Audit de sécurité en cours..."
+                    // On utilise Trivy et on ignore l'erreur pour ne pas bloquer le pipeline
+                    sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL ${IMAGE_NAME} || echo 'Vulnérabilités détectées'"
                 }
             }
         }
@@ -61,9 +60,9 @@ pipeline {
                     ]
                     
                     nodes.each { nodeName ->
-                        echo "Importation de l'image dans le noeud : ${nodeName}..."
-                        // Commande spécifique pour k3d : on utilise k3s ctr pour importer le flux
-                        sh "docker save ${IMAGE_NAME} | docker exec -i ${nodeName} k3s ctr images import -"
+                        echo "Importation de l'image dans ${nodeName}..."
+                        // Correction : On utilise 'ctr -n k8s.io' pour importer dans le namespace Kubernetes
+                        sh "docker save ${IMAGE_NAME} | docker exec -i ${nodeName} ctr -n k8s.io images import -"
                     }
                 }
             }
@@ -72,13 +71,12 @@ pipeline {
         stage('🚀 Déploiement Kubernetes') {
             steps {
                 script {
-                    // Liste des contextes Kubernetes (assurez-vous qu'ils existent via kubectl config get-contexts)
                     def contexts = ['cluster-prod-1', 'cluster-prod-2', 'cluster-dr']
                     
                     contexts.each { ctx ->
-                        echo "Mise à jour du déploiement sur le contexte : ${ctx}"
-                        // On force le redémarrage pour charger la nouvelle image importée
-                        sh "kubectl rollout restart deployment absence-app-deploy --context ${ctx} || echo 'Le déploiement n existe pas encore sur ${ctx}'"
+                        echo "Mise à jour de l'application sur : ${ctx}"
+                        // On relance le déploiement pour qu'il utilise la nouvelle image importée
+                        sh "kubectl rollout restart deployment absence-app-deploy --context ${ctx} || echo 'Déploiement non trouvé sur ${ctx}'"
                     }
                 }
             }
@@ -93,10 +91,10 @@ pipeline {
 
     post {
         success {
-            echo "✅ Succès total ! Webhook -> Jenkins -> Sonar -> Trivy -> k3d"
+            echo "✅ Félicitations ! Votre pipeline DevSecOps est totalement opérationnel."
         }
         failure {
-            echo "❌ Échec du pipeline. Vérifiez les logs."
+            echo "❌ Échec. Vérifiez la commande 'ctr' dans les logs."
         }
     }
 }

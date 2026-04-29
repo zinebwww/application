@@ -6,7 +6,7 @@ pipeline {
             genericVariables: [
                 [key: 'ref', value: '$.ref']
             ],
-            token: 'mon-projet-unique-token', // Doit correspondre à l'URL smee/webhook
+            token: 'mon-projet-unique-token', 
             causeString: 'Déclenchement automatique par GitHub Webhook',
             printPostContent: true,
             silentResponse: false
@@ -38,12 +38,9 @@ pipeline {
         stage('🛡️ Sécurité - Scan Trivy') {
             steps {
                 script {
-                    // Utilisation de Trivy via Docker pour être sûr que ça fonctionne
-                    try {
-                        sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL ${IMAGE_NAME}"
-                    } catch (Exception e) {
-                        echo "Le scan Trivy a trouvé des vulnérabilités ou a échoué, on continue le pipeline."
-                    }
+                    echo "Lancement du scan de sécurité sur l'image..."
+                    // On utilise l'image Docker de Trivy pour scanner l'image qu'on va builder
+                    sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL ${IMAGE_NAME} || echo 'Des vulnérabilités ont été détectées'"
                 }
             }
         }
@@ -57,16 +54,16 @@ pipeline {
         stage('📦 Import dans Clusters k3d') {
             steps {
                 script {
-                    def clusters = [
+                    def nodes = [
                         'k3d-cluster-prod-1-server-0',
                         'k3d-cluster-prod-2-server-0',
                         'k3d-cluster-dr-server-0'
                     ]
                     
-                    clusters.each { node ->
-                        echo "Importation de l'image dans ${node}..."
-                        // La méthode du "Pipe" : Rapide, efficace, pas de fichier temporaire
-                        sh "docker save ${IMAGE_NAME} | docker exec -i ${node} docker load"
+                    nodes.each { nodeName ->
+                        echo "Importation de l'image dans le noeud : ${nodeName}..."
+                        // Commande spécifique pour k3d : on utilise k3s ctr pour importer le flux
+                        sh "docker save ${IMAGE_NAME} | docker exec -i ${nodeName} k3s ctr images import -"
                     }
                 }
             }
@@ -75,14 +72,13 @@ pipeline {
         stage('🚀 Déploiement Kubernetes') {
             steps {
                 script {
-                    // Exemple de déploiement (ajustez les noms des contextes si nécessaire)
-                    // On force le redémarrage pour prendre en compte la nouvelle image
-                    try {
-                        sh "kubectl rollout restart deployment absence-app-deploy --context cluster-prod-1 || echo 'Premier déploiement'"
-                        sh "kubectl rollout restart deployment absence-app-deploy --context cluster-prod-2 || echo 'Premier déploiement'"
-                        sh "kubectl rollout restart deployment absence-app-deploy --context cluster-dr || echo 'Premier déploiement'"
-                    } catch (Exception e) {
-                        echo "Erreur lors du déploiement kubectl : ${e.message}"
+                    // Liste des contextes Kubernetes (assurez-vous qu'ils existent via kubectl config get-contexts)
+                    def contexts = ['cluster-prod-1', 'cluster-prod-2', 'cluster-dr']
+                    
+                    contexts.each { ctx ->
+                        echo "Mise à jour du déploiement sur le contexte : ${ctx}"
+                        // On force le redémarrage pour charger la nouvelle image importée
+                        sh "kubectl rollout restart deployment absence-app-deploy --context ${ctx} || echo 'Le déploiement n existe pas encore sur ${ctx}'"
                     }
                 }
             }
@@ -97,10 +93,10 @@ pipeline {
 
     post {
         success {
-            echo "✅ Pipeline terminé avec succès ! L'application est à jour sur tous les clusters."
+            echo "✅ Succès total ! Webhook -> Jenkins -> Sonar -> Trivy -> k3d"
         }
         failure {
-            echo "❌ Échec du pipeline. Vérifiez les logs ci-dessus."
+            echo "❌ Échec du pipeline. Vérifiez les logs."
         }
     }
 }

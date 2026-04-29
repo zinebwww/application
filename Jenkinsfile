@@ -1,5 +1,6 @@
 pipeline {
     agent any
+
     triggers {
         GenericTrigger(
             genericVariables: [[key: 'ref', value: '$.ref']],
@@ -9,10 +10,12 @@ pipeline {
             silentResponse: false
         )
     }
+
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
         IMAGE_NAME = "absence-app:latest"
     }
+
     stages {
         stage('📥 Récupération du code') {
             steps {
@@ -21,17 +24,27 @@ pipeline {
                 sh "ls -la"
             }
         }
+
         stage('🧪 Tests Unitaires') {
             steps {
                 script {
-                    echo "Installation des dépendances et exécution des tests..."
+                    echo "Création de l'image de test et exécution..."
+                    // On crée un petit Dockerfile à la volée pour installer les dépendances et tester
+                    // Cela évite les problèmes de volume entre Jenkins et le Docker hôte
                     sh '''
-                        docker run --rm -v $(pwd):/app -w /app composer install
-                        docker run --rm -v $(pwd):/app -w /app php:8.2-cli ./vendor/bin/phpunit tests
+                        echo "FROM composer:latest
+                        COPY . /app
+                        WORKDIR /app
+                        RUN composer install
+                        ENTRYPOINT [\\"./vendor/bin/phpunit\\", \\"tests\\"]" > Dockerfile.test
+                        
+                        docker build -t app-test-image -f Dockerfile.test .
+                        docker run --rm app-test-image
                     '''
                 }
             }
         }
+
         stage('🔍 Analyse SonarQube') {
             steps {
                 withSonarQubeEnv('sonar-server') {
@@ -39,6 +52,7 @@ pipeline {
                 }
             }
         }
+
         stage('🛡️ Sécurité - Scan Trivy') {
             steps {
                 script {
@@ -47,32 +61,37 @@ pipeline {
                 }
             }
         }
+
         stage('🐳 Build Docker Image') {
             steps {
                 sh "docker build -t ${IMAGE_NAME} ."
             }
         }
+
         stage('📦 Import dans Clusters k3d') {
             steps {
                 script {
                     def nodes = ['k3d-cluster-prod-1-server-0', 'k3d-cluster-prod-2-server-0', 'k3d-cluster-dr-server-0']
                     nodes.each { nodeName ->
-                        sh "docker save ${IMAGE_NAME} | docker exec -i ${nodeName} ctr -n k8s.io images import -"
+                        echo "Importation dans ${nodeName}..."
+                        sh "docker save ${IMAGE_NAME} | docker exec -i ${nodeName} k3s ctr images import -"
                     }
                 }
             }
         }
+
         stage('🚀 Déploiement Kubernetes') {
             steps {
                 script {
                     def contexts = ['cluster-prod-1', 'cluster-prod-2', 'cluster-dr']
                     contexts.each { ctx ->
-                        sh "kubectl rollout restart deployment absence-app-deploy --context ${ctx} || echo 'Déploiement absent'"
+                        sh "kubectl rollout restart deployment absence-app-deploy --context ${ctx} || echo 'Déploiement non trouvé'"
                     }
                 }
             }
         }
     }
+
     post {
         success { echo "✅ Pipeline terminé avec succès !" }
         failure { echo "❌ Échec du pipeline." }

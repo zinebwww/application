@@ -31,7 +31,7 @@ $db->exec("
     );
 ");
 
-// Insertion des données de test si la table est vide
+
 $count = $db->query("SELECT COUNT(*) FROM employes")->fetchColumn();
 if ($count == 0) {
     $db->exec("

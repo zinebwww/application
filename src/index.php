@@ -299,9 +299,3 @@ $stats = $db->query("
 </div>
 </body>
 </html>
-<?php // Rebuild after context fix
-<?php // Kubeconfig fixed in Jenkins
-<?php // Reboot test
-<?php // Test webhook smee.io
-<?php // Test webhook smee.io
-<?php // Test webhook final

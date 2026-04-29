@@ -44,7 +44,7 @@ if ($count == 0) {
     ");
 }
 
-// Traitement des actions
+
 $message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     switch ($_POST['action']) {

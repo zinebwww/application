@@ -301,3 +301,4 @@ $stats = $db->query("
 </html>
 <?php // Rebuild after context fix
 <?php // Kubeconfig fixed in Jenkins
+<?php // Reboot test

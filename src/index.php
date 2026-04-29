@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Créer le dossier data s'il n'existe pas
 $data_dir = __DIR__ . '/../data';
 if (!is_dir($data_dir)) {
     mkdir($data_dir, 0777, true);

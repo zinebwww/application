@@ -28,7 +28,7 @@ pipeline {
         stage('🧪 Tests Unitaires') {
             steps {
                 script {
-                    echo "Exécution des tests PHPUnit..."
+                    echo "Lancement des tests unitaires PHPUnit..."
                     sh '''
                         echo "FROM composer:latest
                         COPY . /app
@@ -54,15 +54,14 @@ pipeline {
         stage('🛡️ Sécurité - Scan Trivy') {
             steps {
                 script {
-                    echo "Audit de sécurité sur l'image Docker..."
+                    echo "Audit de sécurité sur l'image..."
                     sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL ${IMAGE_NAME} || echo 'Vulnérabilités détectées'"
                 }
             }
         }
 
-        stage('🐳 Build Docker Image') {
+        stage('🐳 Build Image Finale') {
             steps {
-                // Cette étape utilise ton Dockerfile (celui avec le fix SQLite)
                 sh "docker build -t ${IMAGE_NAME} ."
             }
         }
@@ -84,8 +83,8 @@ pipeline {
                 script {
                     def contexts = ['prod-1', 'prod-2', 'dr']
                     contexts.each { ctx ->
-                        echo "Mise à jour du déploiement sur : ${ctx}"
-                        // On applique le déploiement de l'app (k8s-deploy.yaml) et on restart
+                        echo "Mise à jour du cluster : ${ctx}"
+                        // On s'assure que le déploiement existe et on le redémarre
                         sh "kubectl apply -f k8s-deploy.yaml --context ${ctx}"
                         sh "kubectl rollout restart deployment absence-app-deploy --context ${ctx}"
                     }
@@ -95,7 +94,7 @@ pipeline {
     }
 
     post {
-        success { echo "✅ Succès Total ! Code testé, scanné, buildé et déployé avec Monitoring actif." }
-        failure { echo "❌ Échec du pipeline. Vérifie les logs de l'étape en rouge." }
+        success { echo "✅ SUCCÈS : Projet déployé et sécurisé !" }
+        failure { echo "❌ ÉCHEC : Vérifiez les logs du pipeline." }
     }
 }

@@ -4,26 +4,19 @@ FROM php:8.2-apache
 RUN apt-get update && apt-get install -y sqlite3 libsqlite3-dev \
     && docker-php-ext-install pdo pdo_sqlite
 
-# 2. Copie du code source
+# 2. Copie du code source dans /var/www/html
 COPY src/ /var/www/html/
 
-# 3. Création et préparation du dossier de données
+# 3. Préparation des dossiers
+# Votre PHP cherche ../data, donc /var/www/data
 RUN mkdir -p /var/www/data
 
-# 4. Initialisation de la base de données pendant le build
-# On lance le script pour qu'il crée le fichier .db
-RUN cd /var/www/html && php -r "require 'index.php';" || true
+# 4. Initialisation de la DB (en ROOT) pour créer le fichier absences.db
+RUN php /var/www/html/index.php || true
 
-# 5. FIX COMPLET DES PERMISSIONS
-# On donne les droits à www-data sur TOUT le dossier web et le dossier data
-# On met 777 sur le dossier data pour que SQLite puisse créer ses fichiers temporaires
+# 5. FIX FINAL DES DROITS (Obligatoire pour SQLite)
+# On donne la propriété à l'utilisateur web (www-data) sur le code ET la database
 RUN chown -R www-data:www-data /var/www/html /var/www/data && \
-    chmod -R 775 /var/www/html && \
-    chmod -R 777 /var/www/data
-
-# 6. (Optionnel mais recommandé) Si votre base de données se crée dans /var/www/html
-# on s'assure qu'elle appartient aussi à www-data
-RUN find /var/www/html -name "*.db" -exec chown www-data:www-data {} + || true
-RUN find /var/www/html -name "*.sqlite" -exec chown www-data:www-data {} + || true
+    chmod -R 775 /var/www/html /var/www/data
 
 EXPOSE 80

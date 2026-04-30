@@ -4,22 +4,26 @@ FROM php:8.2-apache
 RUN apt-get update && apt-get install -y sqlite3 libsqlite3-dev \
     && docker-php-ext-install pdo pdo_sqlite
 
-# 2. Activation du module rewrite d'Apache (Utile pour les APIs)
-RUN a2enmod rewrite
-
-# 3. Copie du code source
+# 2. Copie du code source
 COPY src/ /var/www/html/
 
-# 4. Création du dossier pour la base de données
+# 3. Création et préparation du dossier de données
 RUN mkdir -p /var/www/data
 
-# 5. Initialisation de la base de données
-# On force l'exécution d'index.php une fois pour créer le fichier sqlite
+# 4. Initialisation de la base de données pendant le build
+# On lance le script pour qu'il crée le fichier .db
 RUN cd /var/www/html && php -r "require 'index.php';" || true
 
-# 6. FIX PERMISSIONS (Très important pour l'erreur "readonly database")
-# Apache tourne avec l'utilisateur www-data. Il doit posséder le dossier data.
+# 5. FIX COMPLET DES PERMISSIONS
+# On donne les droits à www-data sur TOUT le dossier web et le dossier data
+# On met 777 sur le dossier data pour que SQLite puisse créer ses fichiers temporaires
 RUN chown -R www-data:www-data /var/www/html /var/www/data && \
-    chmod -R 775 /var/www/data
+    chmod -R 775 /var/www/html && \
+    chmod -R 777 /var/www/data
+
+# 6. (Optionnel mais recommandé) Si votre base de données se crée dans /var/www/html
+# on s'assure qu'elle appartient aussi à www-data
+RUN find /var/www/html -name "*.db" -exec chown www-data:www-data {} + || true
+RUN find /var/www/html -name "*.sqlite" -exec chown www-data:www-data {} + || true
 
 EXPOSE 80

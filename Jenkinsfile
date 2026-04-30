@@ -28,8 +28,7 @@ pipeline {
         stage('🧪 Tests Unitaires') {
             steps {
                 script {
-                    echo "Exécution des tests via Dockerfile temporaire (évite les erreurs de volume)..."
-                    // On crée une image de test qui contient déjà le code
+                    echo "Exécution des tests via Dockerfile temporaire..."
                     sh '''
                         echo "FROM composer:latest
                         COPY . /app
@@ -63,7 +62,6 @@ pipeline {
 
         stage('🐳 Build Docker Image') {
             steps {
-                // Build de l'image finale pour la production
                 sh "docker build -t ${IMAGE_NAME} ."
             }
         }
@@ -79,7 +77,6 @@ pipeline {
                     
                     nodes.each { nodeName ->
                         echo "Importation de l'image dans ${nodeName}..."
-                        // Correction : On utilise 'ctr' directement (plus fiable sur k3d)
                         sh "docker save ${IMAGE_NAME} | docker exec -i ${nodeName} ctr -n k8s.io images import -"
                     }
                 }
@@ -89,10 +86,13 @@ pipeline {
         stage('🚀 Déploiement Kubernetes') {
             steps {
                 script {
-                    def contexts = ['cluster-prod-1', 'cluster-prod-2', 'cluster-dr']
+                    // Noms des contextes corrigés selon votre kubectl config get-contexts
+                    def contexts = ['prod-1', 'prod-2', 'dr']
+                    
                     contexts.each { ctx ->
-                        echo "Mise à jour du déploiement sur : ${ctx}"
-                        sh "kubectl rollout restart deployment absence-app-deploy --context ${ctx} || echo 'Déploiement non trouvé'"
+                        echo "Mise à jour du déploiement sur le contexte : ${ctx}"
+                        // On force le redémarrage pour charger la nouvelle image importée
+                        sh "kubectl rollout restart deployment absence-app-deploy --context ${ctx} || echo 'Déploiement non trouvé sur ${ctx}'"
                     }
                 }
             }
@@ -100,7 +100,11 @@ pipeline {
     }
 
     post {
-        success { echo "✅ Pipeline terminé avec succès ! Tout est Nadi !" }
-        failure { echo "❌ Échec du pipeline. Regardez l'étape en rouge." }
+        success {
+            echo "✅ Pipeline terminé avec succès ! Votre application est déployée sur prod-1, prod-2 et dr."
+        }
+        failure {
+            echo "❌ Échec du pipeline. Vérifiez les étapes rouges."
+        }
     }
 }

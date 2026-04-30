@@ -28,9 +28,8 @@ pipeline {
         stage('🧪 Tests Unitaires') {
             steps {
                 script {
-                    echo "Création de l'image de test et exécution..."
-                    // On crée un petit Dockerfile à la volée pour installer les dépendances et tester
-                    // Cela évite les problèmes de volume entre Jenkins et le Docker hôte
+                    echo "Exécution des tests via Dockerfile temporaire (évite les erreurs de volume)..."
+                    // On crée une image de test qui contient déjà le code
                     sh '''
                         echo "FROM composer:latest
                         COPY . /app
@@ -64,6 +63,7 @@ pipeline {
 
         stage('🐳 Build Docker Image') {
             steps {
+                // Build de l'image finale pour la production
                 sh "docker build -t ${IMAGE_NAME} ."
             }
         }
@@ -71,10 +71,16 @@ pipeline {
         stage('📦 Import dans Clusters k3d') {
             steps {
                 script {
-                    def nodes = ['k3d-cluster-prod-1-server-0', 'k3d-cluster-prod-2-server-0', 'k3d-cluster-dr-server-0']
+                    def nodes = [
+                        'k3d-cluster-prod-1-server-0',
+                        'k3d-cluster-prod-2-server-0',
+                        'k3d-cluster-dr-server-0'
+                    ]
+                    
                     nodes.each { nodeName ->
-                        echo "Importation dans ${nodeName}..."
-                        sh "docker save ${IMAGE_NAME} | docker exec -i ${nodeName} k3s ctr images import -"
+                        echo "Importation de l'image dans ${nodeName}..."
+                        // Correction : On utilise 'ctr' directement (plus fiable sur k3d)
+                        sh "docker save ${IMAGE_NAME} | docker exec -i ${nodeName} ctr -n k8s.io images import -"
                     }
                 }
             }
@@ -85,6 +91,7 @@ pipeline {
                 script {
                     def contexts = ['cluster-prod-1', 'cluster-prod-2', 'cluster-dr']
                     contexts.each { ctx ->
+                        echo "Mise à jour du déploiement sur : ${ctx}"
                         sh "kubectl rollout restart deployment absence-app-deploy --context ${ctx} || echo 'Déploiement non trouvé'"
                     }
                 }
@@ -93,7 +100,7 @@ pipeline {
     }
 
     post {
-        success { echo "✅ Pipeline terminé avec succès !" }
-        failure { echo "❌ Échec du pipeline." }
+        success { echo "✅ Pipeline terminé avec succès ! Tout est Nadi !" }
+        failure { echo "❌ Échec du pipeline. Regardez l'étape en rouge." }
     }
 }

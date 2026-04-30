@@ -28,7 +28,7 @@ pipeline {
         stage('🧪 Tests Unitaires') {
             steps {
                 script {
-                    echo "Exécution des tests via Dockerfile temporaire..."
+                    echo "Exécution des tests PHPUnit..."
                     sh '''
                         echo "FROM composer:latest
                         COPY . /app
@@ -54,7 +54,7 @@ pipeline {
         stage('🛡️ Sécurité - Scan Trivy') {
             steps {
                 script {
-                    echo "Audit de sécurité..."
+                    echo "Audit de sécurité sur l'image Docker..."
                     sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL ${IMAGE_NAME} || echo 'Vulnérabilités détectées'"
                 }
             }
@@ -62,6 +62,7 @@ pipeline {
 
         stage('🐳 Build Docker Image') {
             steps {
+                // Cette étape utilise ton Dockerfile (celui avec le fix SQLite)
                 sh "docker build -t ${IMAGE_NAME} ."
             }
         }
@@ -69,14 +70,9 @@ pipeline {
         stage('📦 Import dans Clusters k3d') {
             steps {
                 script {
-                    def nodes = [
-                        'k3d-cluster-prod-1-server-0',
-                        'k3d-cluster-prod-2-server-0',
-                        'k3d-cluster-dr-server-0'
-                    ]
-                    
+                    def nodes = ['k3d-cluster-prod-1-server-0', 'k3d-cluster-prod-2-server-0', 'k3d-cluster-dr-server-0']
                     nodes.each { nodeName ->
-                        echo "Importation de l'image dans ${nodeName}..."
+                        echo "Importation dans ${nodeName}..."
                         sh "docker save ${IMAGE_NAME} | docker exec -i ${nodeName} ctr -n k8s.io images import -"
                     }
                 }
@@ -86,13 +82,12 @@ pipeline {
         stage('🚀 Déploiement Kubernetes') {
             steps {
                 script {
-                    // Noms des contextes corrigés selon votre kubectl config get-contexts
                     def contexts = ['prod-1', 'prod-2', 'dr']
-                    
                     contexts.each { ctx ->
-                        echo "Mise à jour du déploiement sur le contexte : ${ctx}"
-                        // On force le redémarrage pour charger la nouvelle image importée
-                        sh "kubectl rollout restart deployment absence-app-deploy --context ${ctx} || echo 'Déploiement non trouvé sur ${ctx}'"
+                        echo "Mise à jour du déploiement sur : ${ctx}"
+                        // On applique le déploiement de l'app (k8s-deploy.yaml) et on restart
+                        sh "kubectl apply -f k8s-deploy.yaml --context ${ctx}"
+                        sh "kubectl rollout restart deployment absence-app-deploy --context ${ctx}"
                     }
                 }
             }
@@ -100,11 +95,7 @@ pipeline {
     }
 
     post {
-        success {
-            echo "✅ Pipeline terminé avec succès ! Votre application est déployée sur prod-1, prod-2 et dr."
-        }
-        failure {
-            echo "❌ Échec du pipeline. Vérifiez les étapes rouges."
-        }
+        success { echo "✅ Succès Total ! Code testé, scanné, buildé et déployé avec Monitoring actif." }
+        failure { echo "❌ Échec du pipeline. Vérifie les logs de l'étape en rouge." }
     }
 }

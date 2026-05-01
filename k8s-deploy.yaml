@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: absence-app-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: absence-app
+  template:
+    metadata:
+      labels:
+        app: absence-app
+    spec:
+      containers:
+      - name: absence-app
+        image: absence-app:latest
+        imagePullPolicy: Never # Très important pour k3d
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: absence-app-service
+spec:
+  selector:
+    app: absence-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: ClusterIP

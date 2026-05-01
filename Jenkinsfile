@@ -58,7 +58,7 @@ pipeline {
         stage('🛡️ 5. Scan Sécurité (Trivy)') {
             steps {
                 script {
-                    // --light pour économiser la RAM sur Kali
+                    // -light pour économiser la RAM sur Kali
                     sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL --light ${IMAGE_NAME} || echo 'Scan OK'"
                 }
             }

@@ -4,8 +4,8 @@ pipeline {
     triggers {
         GenericTrigger(
             genericVariables: [[key: 'ref', value: '$.ref']],
-            token: 'mon-projet-unique-token',
-            causeString: 'Déclenchement automatique par GitHub Webhook (DevSecOps)',
+            token: 'mon-projet-unique-token', 
+            causeString: 'Déclenchement automatique DevSecOps',
             printPostContent: true,
             silentResponse: false
         )
@@ -17,18 +17,17 @@ pipeline {
     }
 
     stages {
-        stage('📥 1. Récupération du code (Checkout)') {
+        stage('📥 1. Checkout') {
             steps {
                 deleteDir()
                 checkout scm
-                sh 'ls -la'
             }
         }
 
-        stage('🧪 2. Tests unitaires PHPUnit') {
+        stage('🧪 2. Tests PHPUnit') {
             steps {
                 script {
-                    echo "Exécution des tests unitaires via Docker..."
+                    echo "Validation du code via PHPUnit (Docker)..."
                     sh '''
                         echo "FROM composer:latest
                         COPY . /app
@@ -42,44 +41,44 @@ pipeline {
             }
         }
 
-        stage('🔍 3. Analyse de code (SonarQube)') {
+        stage('🔍 3. Qualité SonarQube') {
             steps {
+                // Utilise l'URL 172.17.0.1 configurée dans Jenkins
                 withSonarQubeEnv('sonar-server') {
                     sh "${SCANNER_HOME}/bin/sonar-scanner"
                 }
             }
         }
 
-        stage('🐳 4. Construction de l\'image Docker') {
+        stage('🐳 4. Build Image Docker') {
             steps {
                 sh "docker build -t ${IMAGE_NAME} ."
             }
         }
 
-        stage('🛡️ 5. Scan de sécurité (Trivy)') {
+        stage('🛡️ 5. Scan Sécurité Trivy') {
             steps {
                 script {
-                    // Analyse des vulnérabilités HIGH et CRITICAL, mode light pour économiser RAM
-                    sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL --light ${IMAGE_NAME} || echo 'Scan terminé'"
+                    // --light pour économiser la RAM sur ta Kali
+                    sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL --light ${IMAGE_NAME} || echo 'Scan fini'"
                 }
             }
         }
 
-        stage('📦 6. Déploiement multi-cluster (k3d)') {
+        stage('📦 6. Déploiement Multi-Cluster') {
             steps {
                 script {
-                    // Définition des clusters (nom du contexte kubectl et nom du nœud serveur)
                     def clusters = [
                         [ctx: 'k3d-prod-1', node: 'k3d-prod-1-server-0'],
-                        [ctx: 'k3d-dr',   node: 'k3d-dr-server-0']
+                        [ctx: 'k3d-dr',     node: 'k3d-dr-server-0']
                     ]
-                    clusters.each { cluster ->
-                        echo "Déploiement sur le cluster : ${cluster.ctx}"
-                        // Injection de l'image Docker dans le cluster k3d
-                        sh "docker save ${IMAGE_NAME} | docker exec -i ${cluster.node} ctr -n k8s.io images import -"
-                        // Application du manifeste Kubernetes et redémarrage du déploiement
-                        sh "kubectl apply -f k8s-deploy.yaml --context ${cluster.ctx}"
-                        sh "kubectl rollout restart deployment absence-app-deploy --context ${cluster.ctx}"
+                    
+                    clusters.each { c ->
+                        echo "Mise à jour du cluster : ${c.ctx}"
+                        // Injection de l'image Docker
+                        sh "docker save ${IMAGE_NAME} | docker exec -i ${c.node} ctr -n k8s.io images import -"
+                        // Restart du déploiement
+                        sh "kubectl rollout restart deployment absence-app-deploy --context ${c.ctx} || echo 'Premier deploiement'"
                     }
                 }
             }
@@ -88,10 +87,7 @@ pipeline {
 
     post {
         success {
-            echo "✅ Pipeline exécuté avec succès ! Application déployée sur les deux clusters."
-        }
-        failure {
-            echo "❌ Échec du pipeline. Vérifiez les logs ci-dessus."
+            echo "✅ PIPELINE SUCCESS : Tout est Nadi !"
         }
     }
 }

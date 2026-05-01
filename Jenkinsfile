@@ -1,33 +1,18 @@
 pipeline {
     agent any
-
     triggers {
-        GenericTrigger(
-            genericVariables: [[key: 'ref', value: '$.ref']],
-            token: 'mon-projet-unique-token', 
-            causeString: 'Déclenchement automatique DevSecOps',
-            printPostContent: true,
-            silentResponse: false
-        )
+        GenericTrigger(token: 'mon-projet-unique-token', genericVariables: [[key: 'ref', value: '$.ref']])
     }
-
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
         IMAGE_NAME = "absence-app:latest"
     }
-
     stages {
-        stage('📥 1. Checkout') {
-            steps {
-                deleteDir()
-                checkout scm
-            }
-        }
-
+        stage('📥 1. Checkout') { steps { deleteDir(); checkout scm } }
+        
         stage('🧪 2. Tests PHPUnit') {
             steps {
                 script {
-                    echo "Validation du code via PHPUnit (Docker)..."
                     sh '''
                         echo "FROM composer:latest
                         COPY . /app
@@ -41,53 +26,37 @@ pipeline {
             }
         }
 
-        stage('🔍 3. Qualité SonarQube') {
+        stage('🔍 3. Analyse SonarQube') {
             steps {
-                // Utilise l'URL 172.17.0.1 configurée dans Jenkins
                 withSonarQubeEnv('sonar-server') {
                     sh "${SCANNER_HOME}/bin/sonar-scanner"
                 }
             }
         }
 
-        stage('🐳 4. Build Image Docker') {
-            steps {
-                sh "docker build -t ${IMAGE_NAME} ."
-            }
-        }
+        stage('🐳 4. Build Image') { steps { sh "docker build -t ${IMAGE_NAME} ." } }
 
         stage('🛡️ 5. Scan Sécurité Trivy') {
-            steps {
-                script {
-                    // --light pour économiser la RAM sur ta Kali
-                    sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL --light ${IMAGE_NAME} || echo 'Scan fini'"
-                }
-            }
+            steps { script { sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL --light ${IMAGE_NAME} || echo 'OK'" } }
         }
 
-        stage('📦 6. Déploiement Multi-Cluster') {
+        stage('📦 6. Deploy Multi-Cluster') {
             steps {
                 script {
                     def clusters = [
                         [ctx: 'k3d-prod-1', node: 'k3d-prod-1-server-0'],
                         [ctx: 'k3d-dr',     node: 'k3d-dr-server-0']
                     ]
-                    
                     clusters.each { c ->
-                        echo "Mise à jour du cluster : ${c.ctx}"
-                        // Injection de l'image Docker
                         sh "docker save ${IMAGE_NAME} | docker exec -i ${c.node} ctr -n k8s.io images import -"
-                        // Restart du déploiement
-                        sh "kubectl rollout restart deployment absence-app-deploy --context ${c.ctx} || echo 'Premier deploiement'"
+                        sh "kubectl apply -f k8s-deploy.yaml --context ${c.ctx}"
+                        sh "kubectl rollout restart deployment absence-app-deploy --context ${c.ctx}"
                     }
                 }
             }
         }
     }
-
     post {
-        success {
-            echo "✅ PIPELINE SUCCESS : Tout est Nadi !"
-        }
+        success { echo "✅ TOUT EST VERT ! Projet DevSecOps terminé." }
     }
 }

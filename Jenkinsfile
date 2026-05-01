@@ -5,7 +5,7 @@ pipeline {
         GenericTrigger(
             genericVariables: [[key: 'ref', value: '$.ref']],
             token: 'mon-projet-unique-token', 
-            causeString: 'Déclenchement automatique par GitHub Webhook (IaC + DevSecOps)',
+            causeString: 'Déclenchement automatique par GitHub Webhook',
             printPostContent: true,
             silentResponse: false
         )
@@ -17,25 +17,18 @@ pipeline {
     }
 
     stages {
-        stage('📥 1. Code & Infrastructure') {
+        stage('📥 1. Récupération du code') {
             steps {
                 deleteDir()
                 checkout scm
-                script {
-                    echo "Vérification de l'infrastructure via Terraform..."
-                    dir('infrastructure') {
-                        // Utilise -reconfigure pour s'adapter au redémarrage de la Kali
-                        sh 'terraform init -reconfigure'
-                        sh 'terraform apply -auto-approve'
-                    }
-                }
+                sh "ls -la"
             }
         }
 
         stage('🧪 2. Tests Unitaires') {
             steps {
                 script {
-                    echo "Exécution des tests PHPUnit via Docker..."
+                    echo "Exécution des tests PHPUnit..."
                     sh '''
                         echo "FROM composer:latest
                         COPY . /app
@@ -50,27 +43,27 @@ pipeline {
             }
         }
 
-        stage('🔍 3. Analyse SonarQube') {
+        stage('🔍 3. Qualité SonarQube') {
             steps {
+                // On lance SonarQube seul pour ne pas saturer la RAM
                 withSonarQubeEnv('sonar-server') {
                     sh "${SCANNER_HOME}/bin/sonar-scanner"
                 }
             }
         }
 
-        stage('🛡️ 4. Sécurité (Trivy)') {
+        stage('🛡️ 4. Sécurité Trivy') {
             steps {
                 script {
-                    echo "Audit de sécurité sur l'image Docker..."
-                    // On utilise --light pour économiser la RAM
-                    sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL --light ${IMAGE_NAME} || echo 'Scan terminé'"
+                    echo "Audit de sécurité image..."
+                    // On utilise --light pour aller 10x plus vite
+                    sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL --light ${IMAGE_NAME} || echo 'Scan fini'"
                 }
             }
         }
 
-        stage('🐳 5. Build Image Finale') {
+        stage('🐳 5. Build Image') {
             steps {
-                // Utilise le Dockerfile avec le fix SQLite permissions
                 sh "docker build -t ${IMAGE_NAME} ."
             }
         }
@@ -78,26 +71,23 @@ pipeline {
         stage('📦 6. Injection dans Clusters') {
             steps {
                 script {
-                    // Noms des noeuds k3d correspondants à vos clusters
+                    // Noms des serveurs k3d (prod-1 et dr)
                     def nodes = ['k3d-prod-1-server-0', 'k3d-dr-server-0']
-                    
                     nodes.each { nodeName ->
-                        echo "Injection de l'image dans le noeud : ${nodeName}"
+                        echo "Importation dans ${nodeName}..."
                         sh "docker save ${IMAGE_NAME} | docker exec -i ${nodeName} ctr -n k8s.io images import -"
                     }
                 }
             }
         }
 
-        stage('🚀 7. Déploiement Kubernetes') {
+        stage('🚀 7. Déploiement & Rollout') {
             steps {
                 script {
-                    // CONTEXTES CORRIGÉS : k3d-prod-1 et k3d-dr
+                    // On déploie sur vos deux environnements
                     def contexts = ['k3d-prod-1', 'k3d-dr']
-                    
                     contexts.each { ctx ->
-                        echo "Mise à jour du déploiement sur le contexte : ${ctx}"
-                        // On applique le fichier de déploiement et on force le redémarrage
+                        echo "Mise à jour de : ${ctx}"
                         sh "kubectl apply -f k8s-deploy.yaml --context ${ctx}"
                         sh "kubectl rollout restart deployment absence-app-deploy --context ${ctx}"
                     }
@@ -108,10 +98,10 @@ pipeline {
 
     post {
         success {
-            echo "✅ PIPELINE TERMINÉE AVEC SUCCÈS (Prod-1 & DR à jour)"
+            echo "✅ PIPELINE TERMINÉE EN TEMPS RECORD !"
         }
         failure {
-            echo "❌ ÉCHEC DU PIPELINE. Vérifiez l'étape en rouge."
+            echo "❌ Échec. Vérifiez les logs."
         }
     }
 }

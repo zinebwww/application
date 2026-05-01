@@ -24,10 +24,10 @@ pipeline {
             }
         }
 
-        stage('🧪 2. Tests Unitaires') {
+        stage('🧪 2. Tests Unitaires (PHPUnit)') {
             steps {
                 script {
-                    echo "Validation PHPUnit via Docker-in-Docker..."
+                    echo "Lancement des tests PHPUnit via Docker..."
                     sh '''
                         echo "FROM composer:latest
                         COPY . /app
@@ -41,7 +41,7 @@ pipeline {
             }
         }
 
-        stage('🔍 3. Analyse de Code (SonarQube)') {
+        stage('🔍 3. Analyse Code (SonarQube)') {
             steps {
                 withSonarQubeEnv('sonar-server') {
                     sh "${SCANNER_HOME}/bin/sonar-scanner"
@@ -58,25 +58,21 @@ pipeline {
         stage('🛡️ 5. Scan Sécurité (Trivy)') {
             steps {
                 script {
-                    // -light pour économiser la RAM sur Kali
-                    sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL --light ${IMAGE_NAME} || echo 'Scan OK'"
+                    sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL --light ${IMAGE_NAME} || echo 'Scan terminé'"
                 }
             }
         }
 
-        stage('📦 6. Déploiement Kubernetes Multi-Cluster') {
+        stage('📦 6. Déploiement Multi-Cluster (k3d)') {
             steps {
                 script {
                     def clusters = [
                         [ctx: 'k3d-prod-1', node: 'k3d-prod-1-server-0'],
-                        [ctx: 'k3d-dr', node: 'k3d-dr-server-0']
+                        [ctx: 'k3d-dr',   node: 'k3d-dr-server-0']
                     ]
-                    
                     clusters.each { cluster ->
-                        echo "Déploiement sur : ${cluster.ctx}"
-                        // Importation de l'image
+                        echo "Déploiement sur le cluster : ${cluster.ctx}"
                         sh "docker save ${IMAGE_NAME} | docker exec -i ${cluster.node} ctr -n k8s.io images import -"
-                        // Mise à jour Kubernetes
                         sh "kubectl apply -f k8s-deploy.yaml --context ${cluster.ctx}"
                         sh "kubectl rollout restart deployment absence-app-deploy --context ${cluster.ctx}"
                     }
@@ -87,10 +83,10 @@ pipeline {
 
     post {
         success {
-            echo "✅ PIPELINE SUCCESS : Application déployée et Monitoring actif !"
+            echo "✅ Pipeline réussi ! Application déployée et monitoring actif."
         }
         failure {
-            echo "❌ PIPELINE FAILED : Vérifiez les logs Docker ou Sonar."
+            echo "❌ Échec du pipeline. Vérifiez les logs."
         }
     }
 }

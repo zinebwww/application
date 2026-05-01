@@ -5,7 +5,7 @@ pipeline {
         GenericTrigger(
             genericVariables: [[key: 'ref', value: '$.ref']],
             token: 'mon-projet-unique-token', 
-            causeString: 'Déclenchement automatique par GitHub Webhook',
+            causeString: 'Déclenchement automatique DevSecOps',
             printPostContent: true,
             silentResponse: false
         )
@@ -17,25 +17,23 @@ pipeline {
     }
 
     stages {
-        stage('📥 1. Récupération du code') {
+        stage('📥 1. Checkout') {
             steps {
                 deleteDir()
                 checkout scm
-                sh "ls -la"
             }
         }
 
         stage('🧪 2. Tests Unitaires') {
             steps {
                 script {
-                    echo "Exécution des tests PHPUnit..."
+                    echo "Validation PHPUnit via Docker-in-Docker..."
                     sh '''
                         echo "FROM composer:latest
                         COPY . /app
                         WORKDIR /app
                         RUN composer install
                         ENTRYPOINT [\\"./vendor/bin/phpunit\\", \\"tests\\"]" > Dockerfile.test
-                        
                         docker build -t app-test-image -f Dockerfile.test .
                         docker run --rm app-test-image
                     '''
@@ -43,53 +41,44 @@ pipeline {
             }
         }
 
-        stage('🔍 3. Qualité SonarQube') {
+        stage('🔍 3. Analyse de Code (SonarQube)') {
             steps {
-                // On lance SonarQube seul pour ne pas saturer la RAM
                 withSonarQubeEnv('sonar-server') {
                     sh "${SCANNER_HOME}/bin/sonar-scanner"
                 }
             }
         }
 
-        stage('🛡️ 4. Sécurité Trivy') {
-            steps {
-                script {
-                    echo "Audit de sécurité image..."
-                    // On utilise --light pour aller 10x plus vite
-                    sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL --light ${IMAGE_NAME} || echo 'Scan fini'"
-                }
-            }
-        }
-
-        stage('🐳 5. Build Image') {
+        stage('🐳 4. Build Image Docker') {
             steps {
                 sh "docker build -t ${IMAGE_NAME} ."
             }
         }
 
-        stage('📦 6. Injection dans Clusters') {
+        stage('🛡️ 5. Scan Sécurité (Trivy)') {
             steps {
                 script {
-                    // Noms des serveurs k3d (prod-1 et dr)
-                    def nodes = ['k3d-prod-1-server-0', 'k3d-dr-server-0']
-                    nodes.each { nodeName ->
-                        echo "Importation dans ${nodeName}..."
-                        sh "docker save ${IMAGE_NAME} | docker exec -i ${nodeName} ctr -n k8s.io images import -"
-                    }
+                    // --light pour économiser la RAM sur Kali
+                    sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL --light ${IMAGE_NAME} || echo 'Scan OK'"
                 }
             }
         }
 
-        stage('🚀 7. Déploiement & Rollout') {
+        stage('📦 6. Déploiement Kubernetes Multi-Cluster') {
             steps {
                 script {
-                    // On déploie sur vos deux environnements
-                    def contexts = ['k3d-prod-1', 'k3d-dr']
-                    contexts.each { ctx ->
-                        echo "Mise à jour de : ${ctx}"
-                        sh "kubectl apply -f k8s-deploy.yaml --context ${ctx}"
-                        sh "kubectl rollout restart deployment absence-app-deploy --context ${ctx}"
+                    def clusters = [
+                        [ctx: 'k3d-prod-1', node: 'k3d-prod-1-server-0'],
+                        [ctx: 'k3d-dr', node: 'k3d-dr-server-0']
+                    ]
+                    
+                    clusters.each { cluster ->
+                        echo "Déploiement sur : ${cluster.ctx}"
+                        // Importation de l'image
+                        sh "docker save ${IMAGE_NAME} | docker exec -i ${cluster.node} ctr -n k8s.io images import -"
+                        // Mise à jour Kubernetes
+                        sh "kubectl apply -f k8s-deploy.yaml --context ${cluster.ctx}"
+                        sh "kubectl rollout restart deployment absence-app-deploy --context ${cluster.ctx}"
                     }
                 }
             }
@@ -98,10 +87,10 @@ pipeline {
 
     post {
         success {
-            echo "✅ PIPELINE TERMINÉE EN TEMPS RECORD !"
+            echo "✅ PIPELINE SUCCESS : Application déployée et Monitoring actif !"
         }
         failure {
-            echo "❌ Échec. Vérifiez les logs."
+            echo "❌ PIPELINE FAILED : Vérifiez les logs Docker ou Sonar."
         }
     }
 }

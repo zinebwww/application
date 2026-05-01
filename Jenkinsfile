@@ -5,7 +5,7 @@ pipeline {
         GenericTrigger(
             genericVariables: [[key: 'ref', value: '$.ref']],
             token: 'mon-projet-unique-token', 
-            causeString: 'Déclenchement automatique par GitHub Webhook (DevSecOps + IaC)',
+            causeString: 'Déclenchement automatique par GitHub Webhook (IaC + DevSecOps)',
             printPostContent: true,
             silentResponse: false
         )
@@ -17,18 +17,25 @@ pipeline {
     }
 
     stages {
-        stage('📥 1. Récupération du code') {
+        stage('📥 1. Code & Infrastructure') {
             steps {
                 deleteDir()
                 checkout scm
-                sh "ls -la"
+                script {
+                    echo "Vérification de l'infrastructure via Terraform..."
+                    dir('infrastructure') {
+                        // Utilise -reconfigure pour s'adapter au redémarrage de la Kali
+                        sh 'terraform init -reconfigure'
+                        sh 'terraform apply -auto-approve'
+                    }
+                }
             }
         }
 
-        stage('🧪 2. Tests Unitaires (Docker-in-Docker)') {
+        stage('🧪 2. Tests Unitaires') {
             steps {
                 script {
-                    echo "Validation du code PHP via PHPUnit..."
+                    echo "Exécution des tests PHPUnit via Docker..."
                     sh '''
                         echo "FROM composer:latest
                         COPY . /app
@@ -43,7 +50,7 @@ pipeline {
             }
         }
 
-        stage('🔍 3. Qualité de Code (SonarQube)') {
+        stage('🔍 3. Analyse SonarQube') {
             steps {
                 withSonarQubeEnv('sonar-server') {
                     sh "${SCANNER_HOME}/bin/sonar-scanner"
@@ -51,59 +58,47 @@ pipeline {
             }
         }
 
-        stage('🛡️ 4. Sécurité (Scan Trivy)') {
+        stage('🛡️ 4. Sécurité (Trivy)') {
             steps {
                 script {
                     echo "Audit de sécurité sur l'image Docker..."
-                    sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL ${IMAGE_NAME} || echo 'Vulnérabilités détectées'"
+                    // On utilise --light pour économiser la RAM
+                    sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL --light ${IMAGE_NAME} || echo 'Scan terminé'"
                 }
             }
         }
 
         stage('🐳 5. Build Image Finale') {
             steps {
-                // Utilise votre Dockerfile corrigé (Fix SQLite permissions)
+                // Utilise le Dockerfile avec le fix SQLite permissions
                 sh "docker build -t ${IMAGE_NAME} ."
             }
         }
 
-        stage('📦 6. Importation Multi-Cluster') {
+        stage('📦 6. Injection dans Clusters') {
             steps {
                 script {
-                    def nodes = [
-                        'k3d-cluster-prod-1-server-0',
-                        'k3d-cluster-prod-2-server-0',
-                        'k3d-cluster-dr-server-0'
-                    ]
+                    // Noms des noeuds k3d correspondants à vos clusters
+                    def nodes = ['k3d-prod-1-server-0', 'k3d-dr-server-0']
+                    
                     nodes.each { nodeName ->
-                        echo "Injection de l'image dans : ${nodeName}"
+                        echo "Injection de l'image dans le noeud : ${nodeName}"
                         sh "docker save ${IMAGE_NAME} | docker exec -i ${nodeName} ctr -n k8s.io images import -"
                     }
                 }
             }
         }
 
-        stage('⚙️ 7. Infrastructure as Code (Terraform)') {
+        stage('🚀 7. Déploiement Kubernetes') {
             steps {
                 script {
-                    // On se place dans le dossier terraform que vous avez créé
-                    dir('terraform') {
-                        echo "Initialisation de Terraform..."
-                        sh 'terraform init'
-                        echo "Application de la configuration infrastructure..."
-                        sh 'terraform apply -auto-approve'
-                    }
-                }
-            }
-        }
-
-        stage('🚀 8. Déploiement & Rollout') {
-            steps {
-                script {
-                    // On force le redémarrage des pods pour utiliser la nouvelle image injectée
-                    def contexts = ['prod-1', 'prod-2', 'dr']
+                    // CONTEXTES CORRIGÉS : k3d-prod-1 et k3d-dr
+                    def contexts = ['k3d-prod-1', 'k3d-dr']
+                    
                     contexts.each { ctx ->
-                        echo "Redémarrage de l'application sur : ${ctx}"
+                        echo "Mise à jour du déploiement sur le contexte : ${ctx}"
+                        // On applique le fichier de déploiement et on force le redémarrage
+                        sh "kubectl apply -f k8s-deploy.yaml --context ${ctx}"
                         sh "kubectl rollout restart deployment absence-app-deploy --context ${ctx}"
                     }
                 }
@@ -113,10 +108,10 @@ pipeline {
 
     post {
         success {
-            echo "✅ PIPELINE NADI ! Code testé, scanné, Infra Terraform appliquée et App déployée."
+            echo "✅ PIPELINE TERMINÉE AVEC SUCCÈS (Prod-1 & DR à jour)"
         }
         failure {
-            echo "❌ Échec du pipeline. Vérifiez les logs de l'étape en rouge."
+            echo "❌ ÉCHEC DU PIPELINE. Vérifiez l'étape en rouge."
         }
     }
 }

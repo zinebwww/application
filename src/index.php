@@ -1,59 +1,52 @@
 <?php
 session_start();
 
-/**
- * CONFIGURATION DE LA BASE DE DONNÉES
- * Dans Docker, /var/www/html est le dossier du code (src)
- * Le dossier /var/www/data est utilisé pour la base de données
- */
+// Chemin de stockage de la base SQLite (hors du dossier web)
 $data_dir = __DIR__ . '/../data';
-$db_file = $data_dir . '/absences.db';
-
-try {
-    $db = new PDO('sqlite:' . $db_file);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // Initialisation des tables
-    $db->exec("
-        CREATE TABLE IF NOT EXISTS employes (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nom TEXT NOT NULL,
-            prenom TEXT NOT NULL,
-            email TEXT UNIQUE NOT NULL,
-            departement TEXT NOT NULL
-        );
-
-        CREATE TABLE IF NOT EXISTS absences (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            employe_id INTEGER NOT NULL,
-            date_debut DATE NOT NULL,
-            date_fin DATE NOT NULL,
-            motif TEXT NOT NULL,
-            statut TEXT DEFAULT 'En attente',
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (employe_id) REFERENCES employes(id)
-        );
-    ");
-
-    // Ajout de données de test si la table est vide
-    $count = $db->query("SELECT COUNT(*) FROM employes")->fetchColumn();
-    if ($count == 0) {
-        $db->exec("
-            INSERT INTO employes (nom, prenom, email, departement) VALUES
-            ('WARIT', 'Zineb', 'zineb@devsecops.com', 'IT Security'),
-            ('ALAMI', 'Ahmed', 'ahmed@devsecops.com', 'RH'),
-            ('BENNANI', 'Sara', 'sara@devsecops.com', 'Finance'),
-            ('CHADLI', 'Omar', 'omar@devsecops.com', 'Marketing'),
-            ('NAJIB', 'Leila', 'leila@devsecops.com', 'IT Operations');
-        ");
-    }
-} catch (PDOException $e) {
-    die("Erreur de base de données : " . $e->getMessage());
+if (!is_dir($data_dir)) {
+    mkdir($data_dir, 0777, true);
 }
 
-/**
- * GESTION DES ACTIONS (POST)
- */
+$db_file = $data_dir . '/absences.db';
+$db = new PDO('sqlite:' . $db_file);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+// Création des tables
+$db->exec("
+    CREATE TABLE IF NOT EXISTS employes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nom TEXT NOT NULL,
+        prenom TEXT NOT NULL,
+        email TEXT UNIQUE NOT NULL,
+        departement TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS absences (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        employe_id INTEGER NOT NULL,
+        date_debut DATE NOT NULL,
+        date_fin DATE NOT NULL,
+        motif TEXT NOT NULL,
+        statut TEXT DEFAULT 'En attente',
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (employe_id) REFERENCES employes(id)
+    );
+");
+
+// Données de test
+$count = $db->query("SELECT COUNT(*) FROM employes")->fetchColumn();
+if ($count == 0) {
+    $db->exec("
+        INSERT INTO employes (nom, prenom, email, departement) VALUES
+        ('WARIT', 'Zineb', 'zineb@devsecops.com', 'IT Security'),
+        ('ALAMI', 'Ahmed', 'ahmed@devsecops.com', 'RH'),
+        ('BENNANI', 'Sara', 'sara@devsecops.com', 'Finance'),
+        ('CHADLI', 'Omar', 'omar@devsecops.com', 'Marketing'),
+        ('NAJIB', 'Leila', 'leila@devsecops.com', 'IT Operations');
+    ");
+}
+
+// Traitement POST
 $message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     try {
@@ -88,7 +81,7 @@ if (isset($_SESSION['flash'])) {
     unset($_SESSION['flash']);
 }
 
-// Récupération des données pour l'affichage
+// Données pour l'affichage
 $employes = $db->query("SELECT * FROM employes ORDER BY departement, nom")->fetchAll(PDO::FETCH_ASSOC);
 $absences = $db->query("
     SELECT a.*, e.nom, e.prenom, e.departement 
@@ -154,11 +147,11 @@ $stats = $db->query("
     </div>
 
     <?php if ($message): ?>
-        <div class="message"><?= $message ?></div>
+        <div class="message"><?= htmlspecialchars($message) ?></div>
     <?php endif; ?>
 
     <div class="stats">
-        <div class="stat-card"><h3>Total Demandes</h3><div class="number"><?= $stats['total'] ?></div></div>
+        <div class="stat-card"><h3>Total Demandes</h3><div class="number"><?= (int)$stats['total'] ?></div></div>
         <div class="stat-card"><h3>Approuvées</h3><div class="number" style="color:var(--success)"><?= (int)$stats['approuve'] ?></div></div>
         <div class="stat-card"><h3>En attente</h3><div class="number" style="color:var(--warning)"><?= (int)$stats['en_attente'] ?></div></div>
         <div class="stat-card"><h3>Rejetées</h3><div class="number" style="color:var(--danger)"><?= (int)$stats['rejete'] ?></div></div>
@@ -209,15 +202,14 @@ $stats = $db->query("
                     </thead>
                     <tbody>
                         <?php if (empty($absences)): ?>
-                            <tr><td colspan="5" style="text-align: center; color: #999; padding: 30px;">Aucune demande enregistrée.</td></tr>
-                        <?php else: ?>
+                            <tr><td colspan="5" style="text-align: center; color: #999; padding: 30px;">Aucune demande enregistrée.<?php else: ?>
                             <?php foreach ($absences as $a): ?>
                             <tr>
                                 <td>
                                     <strong><?= htmlspecialchars($a['prenom'] . ' ' . $a['nom']) ?></strong><br>
                                     <small style="color:#888"><?= htmlspecialchars($a['departement']) ?></small>
                                 </td>
-                                <td><small><?= date('d/m/Y', strtotime($a['date_debut'])) ?> al <?= date('d/m/Y', strtotime($a['date_fin'])) ?></small></td>
+                                <td><small><?= date('d/m/Y', strtotime($a['date_debut'])) ?> → <?= date('d/m/Y', strtotime($a['date_fin'])) ?></small></td>
                                 <td><?= htmlspecialchars($a['motif']) ?></td>
                                 <td>
                                     <?php 
@@ -251,7 +243,7 @@ $stats = $db->query("
     </div>
 
     <div class="footer">
-        <p>&copy; 2026 DevSecOps Project - Déploiement Haute Disponibilité (Multi-Cluster)</p>
+        <p>© 2026 DevSecOps Project - Déploiement Haute Disponibilité (Multi-Cluster)</p>
     </div>
 </div>
 </body>

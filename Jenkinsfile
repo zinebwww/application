@@ -17,12 +17,32 @@ pipeline {
             }
         }
 
+        // ✅ NOUVEAU : Vérification syntaxique PHP avant tout
+        stage('🔍 0. PHP Lint') {
+            steps {
+                script {
+                    sh '''
+                        echo "🔎 Vérification de la syntaxe PHP..."
+                        # Recherche tous les fichiers .php dans src/
+                        find src/ -name "*.php" -exec php -l {} \\;
+                        echo "✅ Syntaxe PHP valide."
+                    '''
+                }
+            }
+        }
+
         stage('🧪 2. Tests PHPUnit') {
             steps {
                 script {
                     echo "Validation PHPUnit..."
                     sh '''
-                        echo "FROM composer:latest\nCOPY . /app\nWORKDIR /app\nRUN composer install\nENTRYPOINT [\\"./vendor/bin/phpunit\\", \\"tests\\"]" > Dockerfile.test
+                        cat > Dockerfile.test <<EOF
+FROM composer:latest
+COPY . /app
+WORKDIR /app
+RUN composer install
+ENTRYPOINT ["./vendor/bin/phpunit", "tests"]
+EOF
                         docker build -t app-test-image -f Dockerfile.test .
                         docker run --rm app-test-image
                         docker rmi app-test-image || true
@@ -36,11 +56,20 @@ pipeline {
                 withSonarQubeEnv('sonar-server') {
                     sh "${SCANNER_HOME}/bin/sonar-scanner -Dsonar.host.url=${SONAR_URL}"
                 }
+                // Attendre le résultat du Quality Gate et échouer si non satisfait
+                timeout(time: 1, unit: 'HOURS') {
+                    waitForQualityGate abortPipeline: true
+                }
             }
         }
 
         stage('🐳 4. Build Image Finale') {
             steps {
+                // Ajout d'une vérification supplémentaire : on s'assure que le fichier index.php est syntaxiquement correct
+                sh '''
+                    echo "🔍 Vérification finale de index.php avant build..."
+                    php -l src/index.php
+                '''
                 sh "docker build -t ${IMAGE_NAME} ."
             }
         }
@@ -48,8 +77,17 @@ pipeline {
         stage('🛡️ 5. Scan Sécurité Trivy') {
             steps {
                 script {
-                    // --light et --skip-db-update pour ne pas consommer de disque/RAM
-                    sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL --light --skip-db-update ${IMAGE_NAME} || echo 'Audit OK'"
+                    // Correction : enlever --skip-db-update (sinon erreur au premier run)
+                    // On ajoute un cache pour éviter de retélécharger la base à chaque fois
+                    sh '''
+                        docker run --rm \
+                            -v /var/run/docker.sock:/var/run/docker.sock \
+                            -v $HOME/.cache/trivy:/root/.cache/trivy \
+                            aquasec/trivy image \
+                            --severity HIGH,CRITICAL \
+                            ${IMAGE_NAME}
+                        echo "✅ Scan Trivy terminé"
+                    '''
                 }
             }
         }
@@ -80,6 +118,9 @@ pipeline {
                 sh "docker builder prune -f"
                 sh "docker image prune -f"
             }
+        }
+        failure {
+            echo "❌ Pipeline échoué. Consultez les logs ci-dessus."
         }
     }
 }

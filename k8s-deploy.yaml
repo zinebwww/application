@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: absence-app-deploy
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: absence-app
@@ -15,7 +15,7 @@ spec:
       containers:
       - name: absence-app
         image: absence-app:latest
-        imagePullPolicy: Never # Très important pour k3d
+        imagePullPolicy: Never
         ports:
         - containerPort: 80
 ---
@@ -30,4 +30,21 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 80
-  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: absence-app-ingress
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: absence-app-service
+            port:
+              number: 80

@@ -5,7 +5,7 @@ if (!is_dir($data_dir)) { @mkdir($data_dir, 0777, true); }
 $db_file = $data_dir . '/absences.db';
 $db = new PDO('sqlite:' . $db_file);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+//ghbtv
 
 $db->exec("CREATE TABLE IF NOT EXISTS employes (id INTEGER PRIMARY KEY AUTOINCREMENT, nom TEXT, prenom TEXT, email TEXT UNIQUE, departement TEXT);
            CREATE TABLE IF NOT EXISTS absences (id INTEGER PRIMARY KEY AUTOINCREMENT, employe_id INTEGER, date_debut DATE, date_fin DATE, motif TEXT, statut TEXT DEFAULT 'En attente', created_at DATETIME DEFAULT CURRENT_TIMESTAMP);");

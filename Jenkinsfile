@@ -1,6 +1,13 @@
 pipeline {
     agent any
 
+    triggers {
+        GenericTrigger(
+            token: 'mon-projet-unique-token',
+            genericVariables: [[key: 'ref', value: '$.ref']]
+        )
+    }
+
     options {
         timeout(time: 30, unit: 'MINUTES')
     }

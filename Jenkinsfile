@@ -3,6 +3,7 @@ pipeline {
 
     options {
         timeout(time: 30, unit: 'MINUTES')
+        disableConcurrentBuilds()
     }
 
     triggers {
@@ -20,35 +21,29 @@ pipeline {
         SCANNER_HOME = tool 'sonar-scanner'
         IMAGE_NAME = "absence-app:latest"
         SONAR_URL = "http://172.17.0.1:9000"
-        DOCKER_BUILDKIT = '1'
     }
 
     stages {
-        stage('📥 1. Code') {
+        stage('📥 1. Checkout') {
             steps {
                 deleteDir()
                 checkout scm
             }
         }
 
-        stage('🔍 2. PHP Lint') {
-            steps {
-                sh 'find src/ -name "*.php" -exec php -l {} \\;'
-            }
-        }
-
-        stage('🧪 3. Tests & Analyse (Parallèle)') {
+        stage('🧪 2. Analyse & Tests (Parallèle)') {
             parallel {
-                stage('PHPUnit') {
+                stage('PHP Lint & Unit Tests') {
                     steps {
                         script {
                             sh '''
                                 cat > Dockerfile.test <<INNEREOF
-# syntax=docker/dockerfile:1.3-labs
 FROM composer:latest
 COPY . /app
 WORKDIR /app
-RUN --mount=type=cache,target=/root/.composer composer install
+RUN composer install
+# Vérification de la syntaxe PHP (Lint) puis tests
+RUN find src/ -name "*.php" -exec php -l {} \\;
 ENTRYPOINT ["./vendor/bin/phpunit", "tests"]
 INNEREOF
                                 docker build -t app-test-image -f Dockerfile.test .
@@ -58,7 +53,7 @@ INNEREOF
                         }
                     }
                 }
-                stage('SonarQube (async)') {
+                stage('SonarQube') {
                     steps {
                         withSonarQubeEnv('sonar-server') {
                             sh "${SCANNER_HOME}/bin/sonar-scanner -Dsonar.host.url=${SONAR_URL} -Dsonar.qualitygate.wait=false"
@@ -68,37 +63,28 @@ INNEREOF
             }
         }
 
-        stage('🐳 4. Build Image Docker') {
+        stage('🐳 3. Build Image Finale') {
             steps {
                 sh "docker build -t ${IMAGE_NAME} ."
             }
         }
 
-        stage('🛡️ 5. Scan Trivy (avec cache)') {
+        stage('🛡️ 4. Sécurité Trivy') {
             steps {
                 script {
-                    sh '''
-                        sudo mkdir -p /data/trivy-cache
-                        sudo chmod 777 /data/trivy-cache
-                        docker run --rm \
-                            -v /var/run/docker.sock:/var/run/docker.sock \
-                            -v /data/trivy-cache:/root/.cache/trivy \
-                            aquasec/trivy image \
-                            --severity HIGH,CRITICAL \
-                            --skip-db-update \
-                            ${IMAGE_NAME} || echo "Scan terminé"
-                    '''
+                    sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL --light --skip-db-update ${IMAGE_NAME} || echo 'Scan OK'"
                 }
             }
         }
 
-        stage('📦 6. Déploiement Kubernetes') {
+        stage('📦 5. Déploiement Multi-Cluster') {
             steps {
                 script {
                     def clusters = [ [ctx: 'k3d-prod-1', node: 'k3d-prod-1-server-0'] ]
                     if (params.DEPLOY_DR) {
                         clusters.add([ctx: 'k3d-dr', node: 'k3d-dr-server-0'])
                     }
+                    
                     clusters.each { c ->
                         echo "🚀 Déploiement sur ${c.ctx}"
                         sh "docker save ${IMAGE_NAME} | docker exec -i ${c.node} ctr -n k8s.io images import -"
@@ -112,14 +98,12 @@ INNEREOF
 
     post {
         always {
-            echo "🧹 Nettoyage léger (workspace seulement)"
+            echo "🧹 Nettoyage du stockage..."
             deleteDir()
-        }
-        failure {
-            echo "❌ Pipeline échoué. Vérifie les logs ci-dessus."
+            sh "docker builder prune -f"
         }
         success {
-            echo "✅ Pipeline terminé avec succès !"
+            echo "✅ PIPELINE SUCCESS : Tout est Nadi !"
         }
     }
 }

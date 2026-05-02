@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     }
     header("Location: " . $_SERVER['PHP_SELF']); exit;
 }
-//jhyyyby
+
 $employes = $db->query("SELECT * FROM employes ORDER BY prenom")->fetchAll(PDO::FETCH_ASSOC);
 $absences = $db->query("SELECT a.*, e.nom, e.prenom FROM absences a JOIN employes e ON a.employe_id = e.id ORDER BY a.created_at DESC")->fetchAll(PDO::FETCH_ASSOC);
 $stats = $db->query("SELECT COUNT(*) as total, SUM(CASE WHEN statut='Approuvé' THEN 1 ELSE 0 END) as ok FROM absences")->fetch(PDO::FETCH_ASSOC);

@@ -101,7 +101,7 @@ $stats = $db->query("
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DevSecOps | Gestion des Absences</title>
     <style>
-        :root { --primary: #00aa66; --secondary: #764ba2; --success: #28a745; --danger: #dc3545; --warning: #ffc107; }
+        :root { --primary: #ff6600; --secondary: #764ba2; --success: #28a745; --danger: #dc3545; --warning: #ffc107; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', system-ui, sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); min-height: 100vh; padding: 20px; color: #333; }
         .container { max-width: 1100px; margin: 0 auto; }
@@ -138,7 +138,7 @@ $stats = $db->query("
 <div class="container">
     <div class="header">
         <h1>🏢 Système de Gestion des Absences</h1>
-        <p>Pipeline DevSecOps : Jenkins | SonarQube | Trivy | Kubernetes (k3d)</p>
+        <p>Pipeline DevSecOps : Jenkins | SonarQube | Trivy | Kubernetes (k3d) – FINAL</p>
     </div>
 
     <?php if ($message): ?>
@@ -213,7 +213,7 @@ $stats = $db->query("
             </div>
         </div>
     </div>
-    <div class="footer"><p>© 2026 DevSecOps - Déploiement HA Multi-Cluster</p></div>
+    <div class="footer"><p>© 2026 DevSecOps - Déploiement HA Multi-Cluster (Prod + DR)</p></div>
 </div>
 </body>
 </html>

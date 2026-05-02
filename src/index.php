@@ -101,4 +101,3 @@ $stats = $db->query("SELECT COUNT(*) as total, SUM(CASE WHEN statut='Approuvé' 
 </body>
 </html>
 <?php // test persistance
-<?php // test persistance

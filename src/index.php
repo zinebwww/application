@@ -79,7 +79,7 @@ $stats = $db->query("SELECT COUNT(*) as total, SUM(CASE WHEN statut='Approuvé' 
     </div>
 
     <div class="card">
-        <h2>📋 Historique des Absences</h2>
+        <h2> Historique des Absences</h2>
         <table>
             <tr><th>Employé</th><th>Dates</th><th>Motif</th><th>Statut</th><th>Action</th></tr>
             <?php foreach($absences as $a): ?>

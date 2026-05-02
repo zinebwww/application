@@ -18,6 +18,14 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 80
+        volumeMounts:
+        - name: sqlite-storage
+          mountPath: /var/www/data
+      volumes:
+      - name: sqlite-storage
+        hostPath:
+          path: /data/k8s-storage/db
+          type: DirectoryOrCreate
 ---
 apiVersion: v1
 kind: Service
@@ -35,8 +43,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: absence-app-ingress
-  annotations:
-    ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
   - http:

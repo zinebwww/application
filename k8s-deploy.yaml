@@ -44,6 +44,7 @@ kind: Ingress
 metadata:
   name: absence-app-ingress
 spec:
+  ingressClassName: traefik
   rules:
   - http:
       paths:

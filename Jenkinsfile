@@ -1,20 +1,26 @@
 pipeline {
     agent any
+
     triggers {
         GenericTrigger(
             token: 'mon-projet-unique-token',
             genericVariables: [[key: 'ref', value: '$.ref']]
         )
     }
+
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
         IMAGE_NAME = "absence-app:latest"
         SONAR_URL = "http://172.17.0.1:9000"
+        // On force kubectl à utiliser le bon fichier
+        KUBECONFIG = "/var/jenkins_home/.kube/config"
     }
+
     stages {
         stage('📥 1. Checkout') {
             steps { deleteDir(); checkout scm }
         }
+
         stage('🧪 2. Analyse & PHPUnit') {
             parallel {
                 stage('PHPUnit') {
@@ -42,18 +48,20 @@ INNEREOF
                 }
             }
         }
+
         stage('🐳 3. Build & Scan') {
             steps {
                 sh "docker build -t ${IMAGE_NAME} ."
-                sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity HIGH,CRITICAL --skip-db-update ${IMAGE_NAME} || echo 'Audit OK'"
+                sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /data/trivy-cache:/root/.cache/trivy aquasec/trivy image --severity HIGH,CRITICAL --skip-db-update ${IMAGE_NAME} || echo 'Audit OK'"
             }
         }
+
         stage('📦 4. Déploiement Multi-Cluster') {
             steps {
                 script {
                     def clusters = [
-                        [ctx: 'prod-1', node: 'k3d-prod-1-server-0'],
-                        [ctx: 'dr',     node: 'k3d-dr-server-0']
+                        [ctx: 'k3d-prod-1', node: 'k3d-prod-1-server-0'],
+                        [ctx: 'k3d-dr',     node: 'k3d-dr-server-0']
                     ]
                     clusters.each { c ->
                         echo "🚀 Déploiement sur : ${c.ctx}"
@@ -65,10 +73,13 @@ INNEREOF
             }
         }
     }
+
     post {
         always {
-            deleteDir()
-            sh "docker builder prune -f"
+            node {
+                deleteDir()
+                sh "docker builder prune -f"
+            }
         }
     }
 }

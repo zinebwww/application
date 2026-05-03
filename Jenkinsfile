@@ -12,7 +12,6 @@ pipeline {
         SCANNER_HOME = tool 'sonar-scanner'
         IMAGE_NAME = "absence-app:latest"
         SONAR_URL = "http://172.17.0.1:9000"
-        // On force kubectl à utiliser le bon fichier
         KUBECONFIG = "/var/jenkins_home/.kube/config"
     }
 
@@ -68,18 +67,19 @@ INNEREOF
                         sh "docker save ${IMAGE_NAME} | docker exec -i ${c.node} ctr -n k8s.io images import -"
                         sh "kubectl apply -f k8s-deploy.yaml --context ${c.ctx} --validate=false"
                         sh "kubectl rollout restart deployment absence-app-deploy --context ${c.ctx}"
-                    }
-                }
-            }
-        }
-    }
+                    }   
+                }    
+            }    
+        }    
+    }    
 
     post {
         always {
-            node {
+            script {
+                echo "🧹 Nettoyage..."
                 deleteDir()
                 sh "docker builder prune -f"
             }
-        }
-    }
+        }    
+    }    
 }

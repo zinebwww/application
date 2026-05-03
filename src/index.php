@@ -217,3 +217,4 @@ $stats = $db->query("
 </div>
 </body>
 </html>
+< Déclenchement automatique du pipeline -->

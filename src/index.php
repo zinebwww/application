@@ -5,7 +5,7 @@ $data_dir = __DIR__ . '/../data';
 if (!is_dir($data_dir)) {
     mkdir($data_dir, 0777, true);
 }
-
+//ghvgwyywv
 $db_file = $data_dir . '/absences.db';
 $db = new PDO('sqlite:' . $db_file);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

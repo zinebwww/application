@@ -1,0 +1,5 @@
+.scannerwork/
+*.zip
+*.tar
+vendor/
+Dockerfile.test
